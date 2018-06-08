@@ -1,0 +1,66 @@
+/* override position and transform in 3.3.x */
+.carousel-inner .item.left.active {
+    transform: translateX(-25%);
+  }
+  .carousel-inner .item.right.active {
+    transform: translateX(25%);
+  }
+  .carousel-inner .item.right.right.active {
+    transform: translateX(25%);
+  }
+  
+  .carousel-inner .item.next {
+    transform: translateX(25%)
+  }
+  .carousel-inner .item.prev {
+    transform: translateX(-25%)
+  }
+  
+  .carousel-inner .item.right,
+  .carousel-inner .item.left { 
+    transform: translateX(0);
+  }
+  
+  
+  /* .carousel-control.left,.carousel-control.right {background-image:none;} */
+
+  .slider{
+    width: 100%;
+    margin-top: 3px;
+  }
+  .label-default {
+    background-color: #0e80d4;
+}
+.itemCarouselfirst img{
+    height: 100px;
+    width :100%;
+}
+a.list-group-item{
+    font-family: 'Slabo 27px', serif;
+    font-size: 20px;
+    background: #524f4c;
+    color: white;
+}
+a.header {
+    background: #0080FE;
+    border-radius: 0px;
+    margin-top: 10px;
+}
+.toppicks{
+    margin-bottom: 10px;
+    text-align: center;
+    width: 30%;
+}
+.popbrands{
+    text-align: center;
+
+}
+.popbrands h2{
+    font-size: 44px;
+    font-weight: 600;
+    color: #337ab7;
+    font-family: 'Slabo 27px', serif;
+}
+.popbrands h3{
+    font-size: 24px;
+}

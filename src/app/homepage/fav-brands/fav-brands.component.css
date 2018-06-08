@@ -1,0 +1,13 @@
+.popbrands{
+    text-align: center;
+
+}
+.popbrands h2{
+    font-size: 44px;
+    font-weight: 600;
+    color: #337ab7;
+    font-family: 'Slabo 27px', serif;
+}
+.popbrands h3{
+    font-size: 24px;
+}

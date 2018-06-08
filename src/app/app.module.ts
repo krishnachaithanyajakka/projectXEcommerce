@@ -1,14 +1,56 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { NavbarComponent } from './homepage/navbar/navbar.component';
+import { AppRouterModule } from './router/router.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CarouselComponent } from './homepage/carousel/carousel.component';
+import { ImageSliderComponent } from './homepage/image-slider/image-slider.component';
+import { VerticalSliderComponent } from './homepage/vertical-slider/vertical-slider.component';
+import { ItemlistComponent } from './homepage/itemlist/itemlist.component';
+import { FavBrandsComponent } from './homepage/fav-brands/fav-brands.component';
+import { CategoryTabsComponent } from './homepage/category-tabs/category-tabs.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { BigSalesTabsComponent } from './homepage/big-sales-tabs/big-sales-tabs.component';
+import { ApplicantColouselComponent } from './homepage/applicant-colousel/applicant-colousel.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    HomepageComponent,
+    NavbarComponent,
+    CarouselComponent,
+    ImageSliderComponent,
+    VerticalSliderComponent,
+    ItemlistComponent,
+    FavBrandsComponent,
+    CategoryTabsComponent,
+    BigSalesTabsComponent,
+    ApplicantColouselComponent,
+    FooterComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

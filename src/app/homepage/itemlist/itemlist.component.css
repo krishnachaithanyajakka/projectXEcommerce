@@ -1,0 +1,31 @@
+img.card-img-top {
+    width: 100%;
+    margin-top: 10px;
+}
+.label-default {
+    background-color: #0e80d4;
+}
+.allprod{
+    background-color: #434648;
+    font-weight: 600;
+    color: white;
+}
+.list-group-item{
+    font-family: 'Slabo 27px', serif;
+    font-size: 20px;
+}
+a.header {
+    background: #0080FE;
+    border-radius: 0px;
+    margin-top: 10px;
+}
+.toppicks{
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+img.card-img-top{
+    margin-top: 0px;
+    border: 1px solid;
+    border-color: blue;
+}

@@ -1,0 +1,157 @@
+<div class='container'>
+  <div class='nav-bar'>
+    <div>
+      <a class="navbar-brand" href="#"><img src="{{locationSiteURL}}/assets/images/logo.png"></a>
+    </div>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Pincode" name="locationFormControl">
+        </mat-form-field>
+    </div>
+    <div>
+        <form class="form-inline my-2 my-lg-0">
+          <mat-form-field>
+            <input matInput type="search" placeholder="Search" name="searchFormControl">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Search</button>
+        </form>
+    </div>   
+    <mat-tab-group>
+        <div>
+            <mat-tab class="nav-tab" label="Get Started"></mat-tab>
+        </div>
+        <div>
+            <mat-tab class="nav-tab"  label="Sign Up"></mat-tab>
+        </div>
+        <div>
+            <mat-tab class="nav-tab"  label="Sign In"></mat-tab>
+        </div>
+        <div>
+            <mat-tab class="nav-tab"  label="Sale"></mat-tab>
+        </div>
+    </mat-tab-group>
+    <!-- <div>
+        <a mat-raised-button class="nav-link active" href="#">Learn More</a>
+    </div>
+    <div>
+        <a class="nav-link" href="#">Get Started</a>
+    </div>
+    <div>
+        <a class="nav-link" href="#">Sign Up</a>
+    </div>
+    <div>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            (Already a Member)Sign In
+        </a>
+    </div>
+    <div>
+        <a class="nav-link" href="#">Sale</a>
+    </div> -->
+  </div>
+</div>
+<!-- <div class='container'>
+  
+  <mat-grid-list cols="8" rowHeight="100px">
+      <mat-grid-tile>
+          <a class="navbar-brand" href="#"><img src="{{locationSiteURL}}/assets/images/logo.png"></a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <input id="locationFormControl" class="form-control mr-sm-2" type="search" placeholder="Pincode" aria-label="Location">
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <form class="form-inline my-2 my-lg-0">
+              <input id="searchFormControl" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button mat-raised-button color="primary">Search</button>
+          </form>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <a class="nav-link active" href="#">Learn More</a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <a class="nav-link" href="#">Get Started</a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <a class="nav-link" href="#">Sign Up</a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              (Already a Member)Sign In
+          </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <a class="nav-link" href="#">Sale</a>
+      </mat-grid-tile>
+  </mat-grid-list>
+</div> -->
+---------------------------------------------------------------------------------------------------------------------
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link active" href="#">Learn More</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Get Started</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Sign Up</a>
+        </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          (Already a Member)Sign In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">
+            <form [formGroup]="formLogin">
+                <mat-form-field>
+                  <input matInput formControlName="emailFormControl" placeholder="Email address" name="emailFormControl">
+                  <mat-error *ngIf="formLogin.get('emailFormControl').hasError('email') && !formLogin.get('emailFormControl').hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="formLogin.get('emailFormControl').hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <br/>
+                <mat-form-field>
+                    <input matInput formControlName="passwordFormControl" placeholder="Password" name="passwordFormControl">
+                    <mat-error *ngIf="formLogin.get('passwordFormControl').hasError('required')">
+                      Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                <div class="dropdown-divider"></div>
+                        <button mat-raised-button color="primary">Sign in</button>
+                <div class="checkbox">
+                        <label>
+                        <input type="checkbox"> Keep me logged-in
+                        </label>
+                </div>
+            </form>
+            <p class="text-center">OR</p>
+          </a>
+          <a class="dropdown-item" href="#"><p class="text-center">Login via</p>
+                  <div class="social-buttons">
+                      <!-- <a href="#" class="btn btn-fb" onclick="return triggerLoginState()"><i class="fa fa-facebook"></i> Facebook</a> -->
+                      <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                      <a href="#" class="btn btn-tw"  (click)="auth.login()"><i class="fa fa-twitter"></i> Twitter</a>
+                      <!-- *ngIf="!auth.isAuthenticated()" -->
+                  </div>
+          </a>     
+              
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">
+              <div class="bottom text-center">
+                  New here ? <a href="#"><b>Join Us</b></a>
+              </div>
+          </a>
+          
+        </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#">Sale</a>
+        </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+    </ul>
+  </div>

@@ -1,0 +1,104 @@
+<div class="above-nav">
+    <div class="container-fluid">
+      <div class="pull-left">
+        <p>Location</p>
+        sdfs
+      </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Learn More</a></li>
+            <li><a href="#">Get Started</a></li>
+            <li><a href="#">Sale</a></li>
+        </ul>
+    </div>
+</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">[PROJ_X]</a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+              <div class="input-group">                  
+                  <input type="text" class="form-control" placeholder="Search" aria-describedby="sizing-addon1">
+                  <span class="input-group-addon searchbutton" id="sizing-addon1"><img src="../../assets/images/search.svg"></span>
+              </div>            
+          </div>          
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li> 
+                <a href="#">
+                  <form [formGroup]="formLogin">
+                    <div class="row">
+                      <mat-form-field>
+                        <input matInput formControlName="emailFormControl" placeholder="Email address" name="emailFormControl">
+                        <mat-error *ngIf="formLogin.get('emailFormControl').hasError('email') && !formLogin.get('emailFormControl').hasError('required')">
+                          Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="formLogin.get('emailFormControl').hasError('required')">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                      <br/>
+                      <mat-form-field>
+                          <input matInput formControlName="passwordFormControl" placeholder="Password" name="passwordFormControl">
+                          <mat-error *ngIf="formLogin.get('passwordFormControl').hasError('required')">
+                            Password is <strong>required</strong>
+                          </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <a href="">Forget the password ?</a>&nbsp;&nbsp;&nbsp;<button mat-raised-button color="primary">Sign in</button>
+                    </div>
+                    <div class="row">
+                      <mat-checkbox> Keep me logged-in</mat-checkbox>
+                    </div>
+                  </form>
+                  <p class="text-center">OR</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <p class="text-center">Login via</p>
+                  <div class="social-buttons">
+                      <!-- <a href="#" class="btn btn-fb" onclick="return triggerLoginState()"><i class="fa fa-facebook"></i> Facebook</a> -->
+                      <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                      <a href="#" class="btn btn-tw"  (click)="auth.login()"><i class="fa fa-twitter"></i> Twitter</a>
+                      <!-- *ngIf="!auth.isAuthenticated()" -->
+                  </div>
+                </a>     
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>  
+                <div class="dropdown-divider"></div>
+                <a href="#">
+                    <div class="bottom text-center">
+                        New here ? <a href="#"><b>Join Us</b></a>
+                    </div>
+                </a>
+              </li>
+              <!-- <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li> -->
+            </ul>
+          </li>
+          <li class="signup"><a href="#">Sign Up</a></li>
+          <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    (0 items)</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
