@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { BigSalesTabsComponent } from './homepage/big-sales-tabs/big-sales-tabs.component';
 import { ApplicantColouselComponent } from './homepage/applicant-colousel/applicant-colousel.component';
 import { FooterComponent } from './footer/footer.component';
+import { LocationautocompleteDirective} from './homepage/locationautocomplete/locationautocomplete.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +42,12 @@ import { FooterComponent } from './footer/footer.component';
     BigSalesTabsComponent,
     ApplicantColouselComponent,
     FooterComponent,
+    LocationautocompleteDirective,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRouterModule,
     ReactiveFormsModule,
     FormsModule,
@@ -50,7 +55,10 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAMUoLtPjDAaRuqGkLCGRdwuvIo-JcVUVQ'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

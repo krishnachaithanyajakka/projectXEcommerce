@@ -13,16 +13,18 @@
 .navbar-default {
   margin-bottom: 0%;
 }
-.above-nav{
-  height: 40px;
-  background-color: #373a3e;
+ .above-nav{
+    height: 70px;
+    background-color: #337ab7;
+    color: white;
+    font-size: 18px;
 }
-.above-nav p{
+/* .above-nav p{
   color: #fff ;
   line-height: 100px;
   font-size:20px;
   padding: 0;
-}
+} */
 .affix {
   top: 0px;
   width:100%;
@@ -73,6 +75,17 @@
   .form-group{
     width: 100% ;
   }
+  .locationclass .input-group{
+    width:100%;
+    border: 1px solid #f0f4f5 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    padding: 0px !important;
+    display: table !important;
+    /* table-layout: fixed !important; */
+    /* height: 53px !important; */
+    position: relative !important;
+  }
 }
 .navbar-form input{
   padding: 20px;
@@ -98,4 +111,65 @@
   .form-group{
     width: 100% ;
   }
+  .locationclass .input-group{
+    width:100%;
+    border: 1px solid #f0f4f5 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    padding: 0px !important;
+    display: table !important;
+    /* table-layout: fixed !important; */
+    /* height: 53px !important; */
+    position: relative !important;
+  }
 } 
+#custom-search-input {
+  margin:0;
+  margin-top: 10px;
+  padding: 0;
+}
+
+#custom-search-input .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#custom-search-input button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color:#D9230F;
+}
+
+.search-query:focus + button {
+  z-index: 3;   
+}
+.locationclass{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
+.pac-container{
+  background-color: blue;
+}
+.pac-icon{
+  color: teal;
+}
