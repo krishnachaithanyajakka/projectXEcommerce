@@ -37,7 +37,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">[PROJ_X]</a>
+        <a class="navbar-brand" href>[PROJ_X]</a>
       </div>
   
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,7 +52,12 @@
               </div>            
           </div>          
         </form>
-        <ul class="nav navbar-nav navbar-right">
+        {{userDetails}}
+        <div class="nav navbar-nav navbar-right" *ngIf="navBarService.getUserIsLoggedIn()=='true'">
+          <img src="{{userDetails.picture.data.url}}" />
+          <h4>{{userDetails.name}}</h4> 
+        </div>
+        <ul class="nav navbar-nav navbar-right" *ngIf="!navBarService.getUserIsLoggedIn() || navBarService.getUserIsLoggedIn()=='false'">
           
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In<span class="caret"></span></a>
@@ -91,10 +96,10 @@
               <li>
                 <a href="#">
                   <p class="text-center">Login via</p>
-                  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                  
                   <div class="social-buttons">
                       <!-- <a href="#" class="btn btn-fb" onclick="return triggerLoginState()"><i class="fa fa-facebook"></i> Facebook</a> -->
-                      
+                      <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
                       <a href="#" class="btn btn-tw"  (click)="auth.login()"><i class="fa fa-twitter"></i> Twitter</a>
                       <!-- *ngIf="!auth.isAuthenticated()" -->
                   </div>
@@ -115,7 +120,7 @@
               <li><a href="#">Separated link</a></li> -->
             </ul>
           </li>
-          <li class="signup"><a href="#">Sign Up</a></li>
+          <li class="signup" [routerLink]="'/registration'"><a href="javascript:void(0)">Sign Up</a></li>
           <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    (0 items)</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->

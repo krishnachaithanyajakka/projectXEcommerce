@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NarbarService} from './service/narbar.service';
 import { } from 'googlemaps'
 //import { AuthService } from './auth/auth.service';
 // import { HttpClient } from '@angular/common/http';
@@ -18,15 +19,18 @@ export class NavbarComponent implements OnInit {
   lat:any;
   lng:any;
   address;
+  userDetails;
   formLogin = this.formBuilder.group({
     'emailFormControl': ['', [Validators.required, Validators.email]],
     'passwordFormControl' : ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private navBarService: NarbarService) {
     // private router: Router, 
     // private http: Http
     //this.loadScript();
+    console.log(navBarService.getUserIsLoggedIn());
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
@@ -59,6 +63,8 @@ export class NavbarComponent implements OnInit {
               "/" + response.authResponse.userID + '?fields=id,name,first_name,email,gender,picture.width(150).height(150),age_range,friends',
               (result) => {
                   console.log("result===", result);
+                  this.userDetails = result;
+                  navBarService.setUserIsLoggedIn(true);
                   if (result && !result.error) {
                   }
             });
@@ -84,7 +90,7 @@ export class NavbarComponent implements OnInit {
              let city = results[0].address_components[results[0].address_components.length-5].short_name;                      
               console.log(city);
              //this.shareService.setLocationDetails(city);
-              self.address=city;
+              self.address=results[0].formatted_address;
 
             } else {
               alert("No address available");

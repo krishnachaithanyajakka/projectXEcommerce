@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { BigSalesTabsComponent } from './homepage/big-sales-tabs/big-sales-tabs.
 import { ApplicantColouselComponent } from './homepage/applicant-colousel/applicant-colousel.component';
 import { FooterComponent } from './footer/footer.component';
 import { LocationautocompleteDirective} from './homepage/locationautocomplete/locationautocomplete.component';
+import { RegistrationComponent } from './registration/registration.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,7 @@ import { LocationautocompleteDirective} from './homepage/locationautocomplete/lo
     ApplicantColouselComponent,
     FooterComponent,
     LocationautocompleteDirective,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,8 @@ import { LocationautocompleteDirective} from './homepage/locationautocomplete/lo
     MatInputModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatStepperModule,
+    HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAMUoLtPjDAaRuqGkLCGRdwuvIo-JcVUVQ'
     })
