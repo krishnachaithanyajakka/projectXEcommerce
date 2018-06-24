@@ -71,13 +71,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(){
-    let register={
+    let customer={
       "name" : this.firstFormGroup.controls["name"].value,
       "email" : this.firstFormGroup.controls["email"].value,
       "password" : this.firstFormGroup.controls["password"].value,
       "address" : this.secondFormGroup.controls["address"].value,
       "pincode" : this.secondFormGroup.controls["pincode"].value,
       "contact" : this.secondFormGroup.controls["contact"].value
+    }
+    let register={
+      "customerDetails" : customer
     }
     
     console.log(register);
