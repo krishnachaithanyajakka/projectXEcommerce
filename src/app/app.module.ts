@@ -6,6 +6,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -28,7 +29,11 @@ import { ApplicantColouselComponent } from './homepage/applicant-colousel/applic
 import { FooterComponent } from './footer/footer.component';
 import { LocationautocompleteDirective} from './homepage/locationautocomplete/locationautocomplete.component';
 import { RegistrationComponent } from './registration/registration.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { CustomValidators } from './validator/customValidator';
+import {RegistrationService} from './registration/registration.service';
+import { DocUploadComponent } from './doc-upload/doc-upload.component';
+import { UploadserviceService } from './doc-upload/uploadservice.service';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +52,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     FooterComponent,
     LocationautocompleteDirective,
     RegistrationComponent,
+    DocUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,13 +66,16 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatInputModule,
     MatCheckboxModule,
     MatTabsModule,
-    MatStepperModule,
     HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAMUoLtPjDAaRuqGkLCGRdwuvIo-JcVUVQ'
     })
   ],
-  providers: [],
+  providers: [
+    RegistrationService,
+    CustomValidators,
+    UploadserviceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

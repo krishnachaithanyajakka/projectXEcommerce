@@ -22,6 +22,13 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- https://github.com/aws/aws-amplify/issues/678 fix: -->
+    <script>
+      if (global === undefined) {
+        var global = window;
+      }
+    </script>
+    <!-- https://github.com/aws/aws-amplify/issues/678 fix end-->
   </head>
   <body>
       <app-root></app-root>
