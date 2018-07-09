@@ -9,6 +9,7 @@ import { UploadserviceService } from './uploadservice.service';
 export class DocUploadComponent implements OnInit {
 
   selectedFiles: FileList;
+  data;
   constructor(private _uploadService : UploadserviceService) { }
 
   ngOnInit() {
@@ -16,7 +17,12 @@ export class DocUploadComponent implements OnInit {
 
   upload() {
     const file = this.selectedFiles.item(0);
-    this._uploadService.uploadfile(file);
+    Promise.resolve(this._uploadService.uploadfile(file))
+    .then(
+      data=>{
+        this.data=data;
+        console.log("DocUploadComponent:::"+ this.data);
+      });    
   }
  
   selectFile(event) {

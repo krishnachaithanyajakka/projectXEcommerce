@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationService } from './registration.service';
+import { DocUploadComponent } from '../doc-upload/doc-upload.component';
 import * as $ from 'jquery';
 window['$'] = window['jQuery'] = $;
 
@@ -13,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  @ViewChild(DocUploadComponent) docuploadpath;
   constructor(private _formBuilder: FormBuilder,
               private _registrationService : RegistrationService) { }
 
@@ -71,13 +73,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(){
+    console.log(this.docuploadpath.data);
+    let imagepath= (this.docuploadpath ==null || this.docuploadpath.data==null || this.docuploadpath.data.Location ==null) ? "": this.docuploadpath.data.Location;
     let customer={
       "name" : this.firstFormGroup.controls["name"].value,
       "email" : this.firstFormGroup.controls["email"].value,
       "password" : this.firstFormGroup.controls["password"].value,
       "address" : this.secondFormGroup.controls["address"].value,
       "pincode" : this.secondFormGroup.controls["pincode"].value,
-      "contact" : this.secondFormGroup.controls["contact"].value
+      "contact" : this.secondFormGroup.controls["contact"].value,
+      "image" : imagepath
     }
     let register={
       "customerDetails" : customer

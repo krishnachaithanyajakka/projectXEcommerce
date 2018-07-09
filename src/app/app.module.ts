@@ -6,7 +6,6 @@ import { HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +32,11 @@ import { CustomValidators } from './validator/customValidator';
 import {RegistrationService} from './registration/registration.service';
 import { DocUploadComponent } from './doc-upload/doc-upload.component';
 import { UploadserviceService } from './doc-upload/uploadservice.service';
-
+import { LoginService } from './homepage/navbar/service/login.service';
+import {LoginemitterService} from './utility/loginemitter.service';
+import {Customer} from './pojo/Customer';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { SidebarComponent } from './admin/dashboard/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import { UploadserviceService } from './doc-upload/uploadservice.service';
     LocationautocompleteDirective,
     RegistrationComponent,
     DocUploadComponent,
+    DashboardComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +79,10 @@ import { UploadserviceService } from './doc-upload/uploadservice.service';
   providers: [
     RegistrationService,
     CustomValidators,
-    UploadserviceService
+    UploadserviceService,
+    LoginemitterService,
+    LoginService,
+    Customer
   ],
   bootstrap: [AppComponent]
 })

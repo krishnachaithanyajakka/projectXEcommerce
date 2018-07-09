@@ -10,7 +10,7 @@ export class UploadserviceService {
   FOLDER = 'jsa-s3/';
   constructor() { }
   
-  uploadfile(file) {
+  uploadfile(file):Promise<any> {
  
     const bucket = new S3(
       {
@@ -30,22 +30,51 @@ export class UploadserviceService {
       Bucket: 'projectxassets',
       Key: this.FOLDER + file.name
     };
- 
-    bucket.upload(params, function (err, data) {
-      if (err) {
-        console.log('There was an error uploading your file: ', err);
-        return false;
-      }
- 
-      console.log('Successfully uploaded file.', data);
-      bucket.getObject(params1, function (err, data) {
+    
+    return new Promise ( 
+      (resolve,reject) =>{
+      bucket.upload(params, function (err, data) {
         if (err) {
           console.log('There was an error uploading your file: ', err);
           return false;
-        };
+        }
+   
+        console.log('Successfully uploaded file.', data);
+        //For getting the file if the file is private
+        // bucket.getObject(params1, function (err, data) {
+        //   if (err) {
+        //     console.log('There was an error uploading your file: ', err);
+        //     return false;
+        //   };
+        // });
+        resolve(data);
       });
-      return true;
-    });
+      })
+    
+    
+    // return Promise.resolve(bucket.upload(params, function (err, data) {
+    //   if (err) {
+    //     console.log('There was an error uploading your file: ', err);
+    //     return false;
+    //   }
+ 
+    //   console.log('Successfully uploaded file.', data);
+    //   //For getting the file if the file is private
+    //   // bucket.getObject(params1, function (err, data) {
+    //   //   if (err) {
+    //   //     console.log('There was an error uploading your file: ', err);
+    //   //     return false;
+    //   //   };
+    //   // });
+    //   if(data == null){
+    //     return null;
+    //   }
+    //   return data;
+    // })).then(
+    //   data =>{
+    //     return data;
+    //   }
+    // )
 
     
   }

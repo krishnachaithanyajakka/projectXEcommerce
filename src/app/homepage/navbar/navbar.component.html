@@ -45,21 +45,20 @@
         <form class="navbar-form navbar-left">
           <div class=" form-group" id=custom-search-input>
               <div class="input-group">                  
-                  <input type="text" class=" search-query form-control" placeholder="Search" aria-describedby="sizing-addon1" >
+                  <input type="text" class=" search-query form-control" placeholder="Search" aria-describedby="sizing-addon1" (input)="$event.target.value.length > 3 && searchData($event.target.value)" >
                   <button class="btn btn-danger" type="button">
                       <span class=" glyphicon glyphicon-search"></span>
                   </button>
               </div>            
           </div>          
-        </form>
-        {{userDetails}}
-        <div class="nav navbar-nav navbar-right" *ngIf="navBarService.getUserIsLoggedIn()=='true'">
-          <img src="{{userDetails.picture.data.url}}" />
-          <h4>{{userDetails.name}}</h4> 
-        </div>
-        <ul class="nav navbar-nav navbar-right" *ngIf="!navBarService.getUserIsLoggedIn() || navBarService.getUserIsLoggedIn()=='false'">
-          
-          <li class="dropdown">
+        </form>  
+        <ul class="nav navbar-nav navbar-right" >
+          <li class="dropdown" *ngIf="loginStatus && userDetails">
+                <!-- <img src="{{userDetails.picture.data.url}}" /> -->
+               <img src="{{userDetails.image}}" />
+               <h4>{{userDetails.name}}</h4>
+          </li>
+          <li class="dropdown" *ngIf="loginStatus!=null  && loginStatus == false">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li> 
@@ -84,7 +83,7 @@
                       </mat-form-field>
                     </div>
                     <div class="row">
-                      <a href="">Forget the password ?</a>&nbsp;&nbsp;&nbsp;<button mat-raised-button color="primary">Sign in</button>
+                      <a href="">Forget the password ?</a>&nbsp;&nbsp;&nbsp;<button mat-raised-button color="primary" (click)="login()">Sign in</button>
                     </div>
                     <div class="row">
                       <mat-checkbox> Keep me logged-in</mat-checkbox>
@@ -120,7 +119,8 @@
               <li><a href="#">Separated link</a></li> -->
             </ul>
           </li>
-          <li class="signup" [routerLink]="'/registration'"><a href="javascript:void(0)">Sign Up</a></li>
+          <li *ngIf="loginStatus!=null  && loginStatus == false" class="signup" [routerLink]="'/registration'">
+            <a href="javascript:void(0)">Sign Up</a></li>
           <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    (0 items)</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->

@@ -55,7 +55,6 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper> -->
-<app-doc-upload></app-doc-upload>
   <div class="stepwizard">
       <div class="stepwizard-row setup-panel">
           <div class="stepwizard-step col-xs-6"> 
@@ -83,6 +82,7 @@
                <h3 class="panel-title">Initial Details</h3>
           </div>
           <div class="panel-body">
+              <app-doc-upload></app-doc-upload>
               <div class="form-group">
                   <label class="control-label">Name</label>
                   <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name"  formControlName="name"/>

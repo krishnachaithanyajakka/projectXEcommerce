@@ -21,14 +21,14 @@ export class AjaxService {
   constructor(
     private http: Http,
     private router:Router) {
-      this.header = new Headers({ "content-type": "application/x-www-form-urlencoded", "accept": "application/json, text/plain, */*"});
+      this.header = new Headers({ "content-type": "application/json", "accept": "application/json, text/plain, */*"});
   }
 
   psPost(url,params): Promise<String>{
     return new Promise((resolve,reject)=>{
       let self =this;
     	let loginMessage:string = "";
-      let headers = new Headers({ "content-type": "application/x-www-form-urlencoded",
+      let headers = new Headers({ "content-type": "application/json",
          "accept": "application/json, text/plain, */*"});
       if(url.includes('upload')){
         headers = new Headers();
@@ -62,7 +62,7 @@ export class AjaxService {
             }
         });
      }else{
-       headers = new Headers({ "content-type": "application/x-www-form-urlencoded",
+       headers = new Headers({ "content-type": "application/json",
       "accept": "application/json, text/plain, */*"});
       this.http.post(environment.apiUrl+url,params,{withCredentials: true,headers:headers})
       .toPromise().then(
@@ -132,5 +132,11 @@ export class AjaxService {
   }
   public addCustomer(customer){
     this.psPost("customer",customer);
+  }
+  public loginCustomer(customerDetails): Promise<any>{
+    return this.psPost("login",customerDetails);
+  }
+  public searchProduct(_item){
+    return this.psPost("productname/"+_item,null);
   }
 }

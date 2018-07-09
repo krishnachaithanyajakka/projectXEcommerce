@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NarbarService} from './service/narbar.service';
-import { } from 'googlemaps'
+import { LoginService} from './service/login.service';
+import { LoginemitterService } from '../../utility/loginemitter.service';
+import { Router } from '@angular/router';
+import { Customer } from '../../pojo/Customer';
+import { } from 'googlemaps';
 //import { AuthService } from './auth/auth.service';
 // import { HttpClient } from '@angular/common/http';
 
@@ -20,13 +24,19 @@ export class NavbarComponent implements OnInit {
   lng:any;
   address;
   userDetails;
+  loginSubscription;
+  loginStatus;
   formLogin = this.formBuilder.group({
     'emailFormControl': ['', [Validators.required, Validators.email]],
     'passwordFormControl' : ['', [Validators.required]]
   });
 
   constructor(private formBuilder: FormBuilder,
-              private navBarService: NarbarService) {
+              private navBarService: NarbarService,
+              private _loginService : LoginService,
+              private loginemitterService: LoginemitterService,
+              private router: Router,
+              private customer: Customer) {
     // private router: Router, 
     // private http: Http
     //this.loadScript();
@@ -60,11 +70,28 @@ export class NavbarComponent implements OnInit {
             // use the response variable to get any information about the user and to see the tokens about the users session
             console.log('Welcome!  Fetching your information.... ');
             FB.api(
-              "/" + response.authResponse.userID + '?fields=id,name,first_name,email,gender,picture.width(150).height(150),age_range,friends',
+              "/" + response.authResponse.userID + '?fields=id,name,first_name,email,gender,picture,age_range,friends',
               (result) => {
                   console.log("result===", result);
                   this.userDetails = result;
-                  navBarService.setUserIsLoggedIn(true);
+                  customer.setName(result.first_name);
+                  customer.setId(result.id);
+                  customer.setImage(result.picture.data.url);
+                  if(result.first_name !=null && 
+                    result.id != null){
+                  let details={
+                    "id" : result.id,
+                    "name" : result.first_name,
+                    "email" : result.email!=null? result.email: "",
+                    "loginMedium" : "facebook"
+                  }
+                  var loginDetails={
+                    "customerDetails" : details
+                  }
+                  this._loginService.login(loginDetails);
+                }else{
+                  //throw error that you cannot login through facebook , you need help.Serious Help.
+                }
                   if (result && !result.error) {
                   }
             });
@@ -89,9 +116,7 @@ export class NavbarComponent implements OnInit {
             if (results[0] != null) {
              let city = results[0].address_components[results[0].address_components.length-5].short_name;                      
               console.log(city);
-             //this.shareService.setLocationDetails(city);
-              self.address=results[0].formatted_address;
-
+   
             } else {
               alert("No address available");
             }
@@ -99,13 +124,25 @@ export class NavbarComponent implements OnInit {
 });
       });
     }
+    this.loginSubscription = this.loginemitterService.loginEvent$.subscribe(loginStatus => {
+      this.loginStatus= loginStatus;
+      this.userDetails=this._loginService.getCustomerData();
+      console.log(this.loginStatus);
+    });
    }
 
   ngOnInit() {
+    this.loginStatus=this._loginService.getLoginStatus();
+    console.log("loginStatus::"+this.loginStatus)
+    if(this.userDetails == null){
+      this.userDetails=this._loginService.getCustomerData();
+    }
+    if(this.loginStatus ==null || this.loginStatus== false){
+      this.router.navigate(['/']);
+    }
     if (window.FB) {
       window.FB.XFBML.parse();
-    }
-    
+    }    
   }
   // getCurrentIpLocation(): Observable<any> {
   //   return this._http.get('http://ipinfo.io')
@@ -115,5 +152,24 @@ export class NavbarComponent implements OnInit {
   //       return Observable.throw(error.json());
   //   });
   // }
+  login(){
+    let customer={
+      "email" : this.formLogin.controls["emailFormControl"].value,
+      "password" : this.formLogin.controls["passwordFormControl"].value,
+      "loginMedium" : "manual"
+    }
+    var loginDetails={
+      "customerDetails" : customer
+    }
+    if(this.formLogin.valid){
+      this._loginService.login(loginDetails); 
+    }
+  }
 
+  searchData(_item: string) { // should be called when minimum no of character are 5 in the text field.
+    console.log(_item);
+    if(_item.length >3){
+      this.navBarService.searchProduct(_item);
+    }
+  }
 }
