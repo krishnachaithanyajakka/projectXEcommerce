@@ -136,7 +136,7 @@ export class AjaxService {
   public loginCustomer(customerDetails): Promise<any>{
     return this.psPost("login",customerDetails);
   }
-  public searchProduct(_item){
-    return this.psPost("productname/"+_item,null);
+  public searchProduct(item:String):Promise<any>{
+    return this.psPost("productname?itemname="+item,null);
   }
 }

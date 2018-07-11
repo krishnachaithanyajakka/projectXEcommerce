@@ -9,7 +9,9 @@ import { Customer } from '../../pojo/Customer';
 import { } from 'googlemaps';
 //import { AuthService } from './auth/auth.service';
 // import { HttpClient } from '@angular/common/http';
-
+import * as $ from 'jquery';
+window['$'] = window['jQuery'] = $;
+//import * as _ from 'underscore';
 
 declare var window: any;
 declare var FB: any;
@@ -26,6 +28,7 @@ export class NavbarComponent implements OnInit {
   userDetails;
   loginSubscription;
   loginStatus;
+  products;
   formLogin = this.formBuilder.group({
     'emailFormControl': ['', [Validators.required, Validators.email]],
     'passwordFormControl' : ['', [Validators.required]]
@@ -169,7 +172,15 @@ export class NavbarComponent implements OnInit {
   searchData(_item: string) { // should be called when minimum no of character are 5 in the text field.
     console.log(_item);
     if(_item.length >3){
-      this.navBarService.searchProduct(_item);
+      Promise.resolve(this.navBarService.searchProduct(_item))
+      .then(productlistresponse => {
+        if(productlistresponse && productlistresponse.productList.length>0){
+          this.products=productlistresponse.productList;
+          console.log(this.products);
+        }
+      });      
+    }else{
+      $('.product_dropdown p').remove();
     }
   }
 }

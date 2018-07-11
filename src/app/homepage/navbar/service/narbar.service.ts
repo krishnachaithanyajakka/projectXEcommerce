@@ -16,9 +16,10 @@ export class NarbarService {
     return this.isLoggedIn;
   }
 
-  searchProduct(_item: String){
-    Promise.resolve(this._ajaxService.searchProduct(_item))
+  searchProduct(_item: String):Promise<any>{
+    return Promise.resolve(this._ajaxService.searchProduct(_item))
     .then(products => {
+      console.log(products.productList);
       return products;
     },
       SystemError => {

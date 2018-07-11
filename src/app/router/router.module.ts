@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent} from '../homepage/homepage.component';
 import {RegistrationComponent} from '../registration/registration.component';
 import {DashboardComponent} from '../admin/dashboard/dashboard.component';
+import {LearnMoreComponent} from '../learn-more/learn-more.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,18 @@ import {DashboardComponent} from '../admin/dashboard/dashboard.component';
       {
         path: 'admin',
         component : DashboardComponent
+      },
+      {
+        path: 'learn-more',
+        component : LearnMoreComponent,
+        children: [
+          {
+            path: '', 
+            component: LearnMoreComponent
+          }
+        ]
       }
+      
     ], { useHash: false })
   ],
   exports: [RouterModule]

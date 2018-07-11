@@ -37,6 +37,8 @@ import {LoginemitterService} from './utility/loginemitter.service';
 import {Customer} from './pojo/Customer';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SidebarComponent } from './admin/dashboard/sidebar/sidebar.component';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { OrdersComponent } from './admin/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { SidebarComponent } from './admin/dashboard/sidebar/sidebar.component';
     DocUploadComponent,
     DashboardComponent,
     SidebarComponent,
+    LearnMoreComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
