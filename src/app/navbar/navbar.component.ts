@@ -3,14 +3,16 @@ import {FormControl, NgForm, Validators, FormBuilder, FormGroup} from '@angular/
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NarbarService} from './service/narbar.service';
 import { LoginService} from './service/login.service';
-import { LoginemitterService } from '../../utility/loginemitter.service';
+import { LoginemitterService } from '../utility/loginemitter.service';
 import { Router } from '@angular/router';
-import { Customer } from '../../pojo/Customer';
+import { Customer } from '../pojo/Customer';
+import 'jquery';
+import 'bootstrap';
 import { } from 'googlemaps';
 //import { AuthService } from './auth/auth.service';
 // import { HttpClient } from '@angular/common/http';
-import * as $ from 'jquery';
-window['$'] = window['jQuery'] = $;
+declare var $ : any;
+//window['$'] = window['jQuery'] = $;
 //import * as _ from 'underscore';
 
 declare var window: any;
@@ -29,6 +31,7 @@ export class NavbarComponent implements OnInit {
   loginSubscription;
   loginStatus;
   products;
+  locationCity: String ="";
   formLogin = this.formBuilder.group({
     'emailFormControl': ['', [Validators.required, Validators.email]],
     'passwordFormControl' : ['', [Validators.required]]
@@ -119,7 +122,7 @@ export class NavbarComponent implements OnInit {
             if (results[0] != null) {
              let city = results[0].address_components[results[0].address_components.length-5].short_name;                      
               console.log(city);
-   
+              this.locationCity=city;
             } else {
               alert("No address available");
             }
@@ -141,11 +144,12 @@ export class NavbarComponent implements OnInit {
       this.userDetails=this._loginService.getCustomerData();
     }
     if(this.loginStatus ==null || this.loginStatus== false){
-      this.router.navigate(['/']);
+     // this.router.navigate(['/']);
     }
     if (window.FB) {
       window.FB.XFBML.parse();
-    }    
+    }
+     this.loadScript();
   }
   // getCurrentIpLocation(): Observable<any> {
   //   return this._http.get('http://ipinfo.io')
@@ -183,4 +187,36 @@ export class NavbarComponent implements OnInit {
       $('.product_dropdown p').remove();
     }
   }
+
+  openModal(id){
+    $("#"+id).modal('show');
+  }
+
+ 
+
+public loadScript() {  
+  var isFound = false;
+  var scripts = document.getElementsByTagName("script")
+  for (var i = 0; i < scripts.length; ++i) {
+      if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
+          isFound = true;
+      }
+  }
+
+  if (!isFound) {
+      var dynamicScripts = ["../assets/js/bootstrap.min.js",
+                            "../assets/js/slick.min.js",
+                            "./assets/js/main.js"];
+
+      for (var i = 0; i < dynamicScripts .length; i++) {
+          let node = document.createElement('script');
+          node.src = dynamicScripts [i];
+          node.type = 'text/javascript';
+          node.async = false;
+          node.charset = 'utf-8';
+          document.getElementsByTagName('head')[0].appendChild(node);
+      }
+
+  }
+}
 }

@@ -1,0 +1,239 @@
+<!-- HEADER -->
+<header>
+  <!-- top Header -->
+  <div id="top-header">
+    <div class="container">
+      <div class="pull-left">
+        <span>Welcome to PROJECT-X!</span>
+      </div>
+      {{locationCity}}
+      <div class="col-md-4" *ngIf="locationCity.length >0">       
+        {{locationCity.length}}         
+          <button class="location-btn"><i class="fa fa-map-marker"></i></button>
+          <input class=" search-query input location-input" type="text" placeholder="Location" name="Location" [(ngModel)]="address" #LocationCtrl="ngModel"
+          Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)" value="locationCity">  
+      </div>
+      <div class="pull-right">
+        <ul class="header-top-links">
+          <li><a href="#">Get Started</a></li>
+          <li><a href="#">Sale</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li class="dropdown default-dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">ENG <i class="fa fa-caret-down"></i></a>
+            <ul class="custom-menu">
+              <li><a href="#">English (ENG)</a></li>
+              <li><a href="#">Russian (Ru)</a></li>
+              <li><a href="#">French (FR)</a></li>
+              <li><a href="#">Spanish (Es)</a></li>
+            </ul>
+          </li>
+          <li class="dropdown default-dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
+            <ul class="custom-menu">
+              <li><a href="#">USD ($)</a></li>
+              <li><a href="#">EUR (€)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /top Header -->
+
+  <!-- header -->
+  <div class="container">
+    <div id="header">
+    
+      <div class="pull-left">
+        <!-- Logo -->
+        <div class="header-logo">
+          <a class="logo" href="#">
+            <h1>PROJECT-X</h1>
+          </a>
+        </div>
+        <!-- /Logo -->
+
+       
+      </div>
+      <div class="pull-right">
+        <ul class="header-btns">
+          <!-- Account -->
+          <li class="header-account dropdown default-dropdown">
+            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+              <div class="header-btns-icon">
+                <i class="fa fa-user-o"></i>
+              </div>
+              <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+            </div>
+            <a href="#" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Join</a>
+            <ul class="custom-menu">
+              <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+              <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+              <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+              <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+              <li><a  (click)="openModal('loginModal')"><i class="fa fa-unlock-alt"></i> Login</a></li>
+              <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+            </ul>
+          </li>
+          <!-- /Account -->
+
+          <!-- Cart -->
+          <li class="header-cart dropdown default-dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+              <div class="header-btns-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="qty">3</span>
+              </div>
+              <strong class="text-uppercase">My Cart:</strong>
+              <br>
+              <span>35.20$</span>
+            </a>
+            <div class="custom-menu">
+              <div id="shopping-cart">
+                <div class="shopping-cart-list">
+                  <div class="product product-widget">
+                    <div class="product-thumb">
+                      <img src="../../../assets/images/thumb-product01.jpg" alt="">
+                    </div>
+                    <div class="product-body">
+                      <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                      <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                    </div>
+                    <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                  </div>
+                  <div class="product product-widget">
+                    <div class="product-thumb">
+                      <img src="../../../assets/images/thumb-product01.jpg" alt="">
+                    </div>
+                    <div class="product-body">
+                      <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                      <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                    </div>
+                    <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                  </div>
+                </div>
+                <div class="shopping-cart-btns">
+                  <button class="main-btn">View Cart</button>
+                  <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- /Cart -->
+          <!-- Learn More -->
+          <li class="header-cart dropdown default-dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+              <div class="header-btns-icon">
+                <i class="fa fa-graduation-cap"></i>
+              </div>
+              <strong class="text-uppercase">Learn More</strong>
+              <br>                
+            </a>
+          </li>
+
+          <!-- Mobile nav toggle-->
+          <li class="nav-toggle">
+            <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
+          </li>
+          <!-- / Mobile nav toggle -->
+        </ul>
+      </div>
+    </div>
+    <!-- header -->
+  </div>
+  <!-- container -->
+</header>
+<!-- /HEADER -->
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!--template code starts-->
+          <div class="omb_login">
+              <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+            <div class="row omb_row-sm-offset-3 omb_socialButtons">
+              <div class="col-xs-4 col-sm-2">
+                  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                <!-- <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+                  <i class="fa fa-facebook visible-xs"></i>
+                  <span class="hidden-xs">Facebook</span>
+                </a> -->
+              </div>
+            </div>
+            <div class="row omb_row-sm-offset-3 omb_socialButtons">
+              <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+                  <i class="fa fa-twitter visible-xs"></i>
+                  <!-- <a href="#" class="btn btn-tw"  (click)="auth.login()"><i class="fa fa-twitter"></i> Twitter</a> -->
+                  <span class="hidden-xs">Twitter</span>
+                </a>
+              </div>	
+            </div>
+            <div class="row omb_row-sm-offset-3 omb_socialButtons">
+              <div class="col-xs-4 col-sm-2">
+                <a href="#" class="btn btn-lg btn-block omb_btn-google">
+                  <i class="fa fa-google-plus visible-xs"></i>
+                  <span class="hidden-xs">Google+</span>
+                </a>
+              </div>	
+            </div>
+        
+            <div class="row omb_row-sm-offset-3 omb_loginOr">
+              <div class="col-xs-12 col-sm-6">
+                <hr class="omb_hrOr">
+                <span class="omb_spanOr">or</span>
+              </div>
+            </div>
+        
+            <div class="row omb_row-sm-offset-3">
+              <div class="col-xs-12 col-sm-6">	
+                  <form  [formGroup]="formLogin" class="omb_loginForm" autocomplete="off">
+                    <mat-form-field>
+                      <input matInput formControlName="emailFormControl" placeholder="Email address" name="emailFormControl">
+                      <mat-error *ngIf="formLogin.get('emailFormControl').hasError('email') && !formLogin.get('emailFormControl').hasError('required')">
+                        Please enter a valid email address
+                      </mat-error>
+                      <mat-error *ngIf="formLogin.get('emailFormControl').hasError('required')">
+                        Email is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>                            
+                    <mat-form-field>
+                        <input matInput formControlName="passwordFormControl" placeholder="Password" name="passwordFormControl">
+                        <mat-error *ngIf="formLogin.get('passwordFormControl').hasError('required')">
+                          Password is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>     
+                    <div class="dropdown-divider"></div>
+                    <button mat-raised-button color="primary">Sign in</button>   
+                </form>
+              </div>
+            </div>
+            <div class="row omb_row-sm-offset-3">
+              <div class="col-xs-12 col-sm-3">
+                <label class="checkbox">
+                  <input type="checkbox" value="remember-me">Remember Me
+                </label>
+              </div>
+              <div class="col-xs-12 col-sm-3">
+                <p class="omb_forgotPwd">
+                  <a href="#">Forgot password?</a>
+                </p>
+              </div>
+            </div>	    	
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
+  </div>

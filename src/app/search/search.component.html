@@ -1,0 +1,15 @@
+<!-- Search -->
+<div class="header-search">
+
+  <form>
+    <input class=" location-query input location-input pull-left" type="text" placeholder="Location" (input)="$event.target.value.length > 3 && searchData($event.target.value)">
+    <button class="location-btn">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+    </button>
+    <input class=" search-query input search-input pull-right" type="text" placeholder="Search" (input)="$event.target.value.length > 3 && searchData($event.target.value)">
+    <button class="search-btn">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
+</div>
+<!-- /Search -->

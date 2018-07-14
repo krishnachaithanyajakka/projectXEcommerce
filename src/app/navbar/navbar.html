@@ -59,7 +59,6 @@
         </form>  
         <ul class="nav navbar-nav navbar-right" >
           <li class="dropdown" *ngIf="loginStatus && userDetails">
-                <!-- <img src="{{userDetails.picture.data.url}}" /> -->
                <img src="{{userDetails.image}}" />
                <h4>{{userDetails.name}}</h4>
           </li>
@@ -118,16 +117,12 @@
                     </div>
                 </a>
               </li>
-              <!-- <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li> -->
             </ul>
           </li>
           <li *ngIf="loginStatus!=null  && loginStatus == false" class="signup" [routerLink]="'/registration'">
             <a href="javascript:void(0)">Sign Up</a></li>
           <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>    (0 items)</a></li>
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      </div>
+    </div>
   </nav>

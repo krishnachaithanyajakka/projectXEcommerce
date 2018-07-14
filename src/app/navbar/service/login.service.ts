@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AjaxService } from '../../../services/ajax.service';
-import {LoginemitterService} from '../../../utility/loginemitter.service';
-import { Customer } from '../../../pojo/Customer';
+import { AjaxService } from '../../services/ajax.service';
+import {LoginemitterService} from '../../utility/loginemitter.service';
+import { Customer } from '../../pojo/Customer';
 @Injectable({
   providedIn: 'root'
 })

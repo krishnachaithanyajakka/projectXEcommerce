@@ -8,29 +8,30 @@ window['$'] = window['jQuery'] = $;
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css',
+              '../../assets/css/login.css']
 })
 export class RegistrationComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  firstFormGroup = this._formBuilder.group({
+    name: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+    confirmpassword: ['', Validators.required]
+  });
+  secondFormGroup = this._formBuilder.group({
+    address: ['', Validators.required],
+    pincode: ['', Validators.required],
+    contact: ['', Validators.required]
+  });
+  
   @ViewChild(DocUploadComponent) docuploadpath;
   constructor(private _formBuilder: FormBuilder,
               private _registrationService : RegistrationService) { }
 
+  
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmpassword: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      address: ['', Validators.required],
-      pincode: ['', Validators.required],
-      contact: ['', Validators.required]
-    });
-    
+
     var navListItems = $('div.setup-panel div a'),
     allContent = $('.setup-content'),
     allNextBtn = $('.nextBtn');
@@ -70,6 +71,7 @@ export class RegistrationComponent implements OnInit {
         if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
     });
     $('div.setup-panel div a.btn-success').trigger('click');
+    this.loadScript();
   }
 
   register(){
@@ -95,6 +97,29 @@ export class RegistrationComponent implements OnInit {
 
     }
    
+  }
+  public loadScript() {  
+    var isFound = false;
+    var scripts = document.getElementsByTagName("script")
+    for (var i = 0; i < scripts.length; ++i) {
+        if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
+            isFound = true;
+        }
+    }
+  
+    if (!isFound) {
+        var dynamicScripts = ["../../assets/js/login.js"];
+  
+        for (var i = 0; i < dynamicScripts .length; i++) {
+            let node = document.createElement('script');
+            node.src = dynamicScripts [i];
+            node.type = 'text/javascript';
+            node.async = false;
+            node.charset = 'utf-8';
+            document.getElementsByTagName('head')[0].appendChild(node);
+        }
+  
+    }
   }
 
 }

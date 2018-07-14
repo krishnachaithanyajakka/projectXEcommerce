@@ -1,163 +1,47 @@
-<div class="container">
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
-<!-- <mat-horizontal-stepper [linear]="!isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Inital Details</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="First name, Last name" formControlName="name" required>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email" required>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" required>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Confirm Password" formControlName="confirmpassword" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="address" required>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Pincode" formControlName="pincode" required>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Contact No." formControlName="contact" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="register()">Submit</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper> -->
-  <div class="stepwizard">
-      <div class="stepwizard-row setup-panel">
-          <div class="stepwizard-step col-xs-6"> 
-              <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
-              <p><small>Initial Details</small></p>
-          </div>
-          <div class="stepwizard-step col-xs-6"> 
-              <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-              <p><small>Address</small></p>
-          </div>
-          <!-- <div class="stepwizard-step col-xs-3"> 
-              <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-              <p><small>Schedule</small></p>
-          </div>
-          <div class="stepwizard-step col-xs-3"> 
-              <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-              <p><small>Cargo</small></p>
-          </div> -->
-      </div>
-  </div>
-  
-  <form role="form" [formGroup]="firstFormGroup">
-      <div class="panel panel-primary setup-content" id="step-1">
-          <div class="panel-heading">
-               <h3 class="panel-title">Initial Details</h3>
-          </div>
-          <div class="panel-body">
-              <app-doc-upload></app-doc-upload>
-              <div class="form-group">
-                  <label class="control-label">Name</label>
-                  <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name"  formControlName="name"/>
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Email</label>
-                  <input maxlength="100" type="email" required="required" class="form-control" placeholder="Enter Email"  formControlName="email"/>
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Password</label>
-                  <input maxlength="100" type="password" required="required" class="form-control" placeholder="Enter Password"  formControlName="password"/>
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Confirm Password</label>
-                  <input maxlength="100" type="password" required="required" class="form-control" placeholder="Re-Enter Password"  formControlName="confirmpassword"/>
-              </div>
-              <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-          </div>
-      </div>
-    </form>
-    <form role="form" [formGroup]="secondFormGroup">
-      <div class="panel panel-primary setup-content" id="step-2">
-          <div class="panel-heading">
-               <h3 class="panel-title">Address</h3>
-          </div>
-          <div class="panel-body">
-              <div class="form-group">
-                  <label class="control-label">Address</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Address"  formControlName="address"/>
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Pincode</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Pincode" formControlName="pincode"/>
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Contact No.</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Contact No." formControlName="contact"/>
-              </div>
-              <button class="btn btn-success nextBtn pull-right" type="submit" (click)="register()">Finish!</button>
-          </div>
-      </div>
-      
-      <!-- <div class="panel panel-primary setup-content" id="step-3">
-          <div class="panel-heading">
-               <h3 class="panel-title">Schedule</h3>
-          </div>
-          <div class="panel-body">
-              <div class="form-group">
-                  <label class="control-label">Company Name</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Company Address</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
-              </div>
-              <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-          </div>
-      </div>
-      
-      <div class="panel panel-primary setup-content" id="step-4">
-          <div class="panel-heading">
-               <h3 class="panel-title">Cargo</h3>
-          </div>
-          <div class="panel-body">
-              <div class="form-group">
-                  <label class="control-label">Company Name</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-              </div>
-              <div class="form-group">
-                  <label class="control-label">Company Address</label>
-                  <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
-              </div>
-              <button class="btn btn-success pull-right" type="submit">Finish!</button>
-          </div>
-      </div> -->
-  </form>
-
+<div class="form">     
+    <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+    </ul> 
+    <div class="tab-content">
+        <div id="signup">   
+            <h1>Sign Up for Free</h1>
+            <form action="/" method="post">
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <label>First Name<span class="req">*</span></label>
+                        <input type="text" required autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>Last Name<span class="req">*</span></label>
+                        <input type="text"required autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="field-wrap">
+                    <label>Email Address<span class="req">*</span></label>
+                    <input type="email"required autocomplete="off"/>
+                </div>
+                <div class="field-wrap">
+                    <label>Set A Password<span class="req">*</span></label>
+                    <input type="password"required autocomplete="off"/>
+                </div>
+                <button type="submit" class="button button-block">Get Started</button>
+            </form>
+        </div>
+        <div id="login">   
+            <h1>Welcome Back!</h1>
+            <form action="/" method="post">
+                <div class="field-wrap">
+                    <label>Email Address<span class="req">*</span></label>
+                    <input type="email"required autocomplete="off"/>
+                </div>
+                <div class="field-wrap">
+                    <label>Password<span class="req">*</span></label>
+                    <input type="password"required autocomplete="off"/>
+                </div>
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                <button class="button button-block">Log In</button>
+            </form>
+        </div> 
+    </div><!-- tab-content -->
 </div>

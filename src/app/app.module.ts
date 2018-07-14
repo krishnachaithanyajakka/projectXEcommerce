@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { NavbarComponent } from './homepage/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { AppRouterModule } from './router/router.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,13 +32,26 @@ import { CustomValidators } from './validator/customValidator';
 import {RegistrationService} from './registration/registration.service';
 import { DocUploadComponent } from './doc-upload/doc-upload.component';
 import { UploadserviceService } from './doc-upload/uploadservice.service';
-import { LoginService } from './homepage/navbar/service/login.service';
+import { LoginService } from './navbar/service/login.service';
 import {LoginemitterService} from './utility/loginemitter.service';
 import {Customer} from './pojo/Customer';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SidebarComponent } from './admin/dashboard/sidebar/sidebar.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { OrdersComponent } from './admin/orders/orders.component';
+import { NeighboursComponent } from './neighbours/neighbours.component';
+import { CategoryNavComponent } from './category-nav/category-nav.component';
+import { MenuNavComponent } from './menu-nav/menu-nav.component';
+import { MiddleBannerComponent } from './middle-banner/middle-banner.component';
+import { ProductDisplayFirstComponent } from './product-display-first/product-display-first.component';
+import { ProductDisplayMiddleComponent } from './product-display-middle/product-display-middle.component';
+import { BigBannerComponent } from './big-banner/big-banner.component';
+import { LatestProductComponent } from './latest-product/latest-product.component';
+import { PickedItemsComponent } from './picked-items/picked-items.component';
+import { SearchComponent } from './search/search.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { SearchProductsComponent } from './search-products/search-products.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +75,19 @@ import { OrdersComponent } from './admin/orders/orders.component';
     SidebarComponent,
     LearnMoreComponent,
     OrdersComponent,
+    NeighboursComponent,
+    CategoryNavComponent,
+    MenuNavComponent,
+    MiddleBannerComponent,
+    ProductDisplayFirstComponent,
+    ProductDisplayMiddleComponent,
+    BigBannerComponent,
+    LatestProductComponent,
+    PickedItemsComponent,
+    SearchComponent,
+    ProductDetailsComponent,
+    SearchProductsComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

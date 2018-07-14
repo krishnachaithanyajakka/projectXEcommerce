@@ -4,6 +4,10 @@ import { HomepageComponent} from '../homepage/homepage.component';
 import {RegistrationComponent} from '../registration/registration.component';
 import {DashboardComponent} from '../admin/dashboard/dashboard.component';
 import {LearnMoreComponent} from '../learn-more/learn-more.component';
+import {NeighboursComponent} from "../neighbours/neighbours.component";
+import { ProductDetailsComponent } from "../product-details/product-details.component";
+import { SearchProductsComponent } from "../search-products/search-products.component";
+import { CheckoutComponent } from "../checkout/checkout.component";
 
 @NgModule({
   imports: [
@@ -29,6 +33,22 @@ import {LearnMoreComponent} from '../learn-more/learn-more.component';
             component: LearnMoreComponent
           }
         ]
+      },
+      {
+        path:'neighbours',
+        component : NeighboursComponent
+      },
+      {
+        path: 'product/:id',
+        component : ProductDetailsComponent
+      },
+      {
+        path: 'searchproduct/:category',
+        component: SearchProductsComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
       }
       
     ], { useHash: false })
