@@ -1,0 +1,79 @@
+<div class="form">     
+    <ul class="tab-group">
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+    </ul> 
+    <div class="tab-content">
+        <div id="signup">
+            <h1>Sign Up for Free</h1>
+            <div class="stepwizard">
+                <div class="stepwizard-row setup-panel">
+                    <div class="stepwizard-step col-xs-6"> 
+                        <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                        <p><small>Initial Details</small></p>
+                    </div>
+                    <div class="stepwizard-step col-xs-6"> 
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        <p><small>Address</small></p>
+                    </div>
+                </div>
+            </div>
+            <form  [formGroup]="firstFormGroup">
+                <div class= "setup-content" id="step-1">
+                  <div class="field-wrap">
+                    <app-doc-upload></app-doc-upload>
+                  </div>
+                  <div class="field-wrap">
+                      <label>Name<span class="req">*</span></label>
+                      <input type="text" required autocomplete="off" formControlName="name"/>
+                  </div>             
+                  <div class="field-wrap">
+                      <label>Email Address<span class="req">*</span></label>
+                      <input type="email" required autocomplete="off" formControlName="email"/>
+                  </div>
+                  <div class="field-wrap">
+                      <label>Set A Password<span class="req">*</span></label>
+                      <input type="password" required autocomplete="off" formControlName="password"/>
+                  </div>
+                  <div class="field-wrap">
+                      <label>Confirm Password<span class="req">*</span></label>
+                      <input type="password" required autocomplete="off" formControlName="confirmpassword"/>
+                  </div>   
+                  <button type="submit" class="button button-block nextBtn">Next</button>
+                </div>
+            </form>
+            <form  [formGroup]="secondFormGroup">
+                <div class= "setup-content" id="step-2">
+                  <div class="field-wrap">
+                      <label>Address<span class="req">*</span></label>
+                      <input type="text" required autocomplete="off" formControlName="address"/>
+                  </div>             
+                  <div class="field-wrap">
+                      <label>Pincode<span class="req">*</span></label>
+                      <input type="email" required autocomplete="off" formControlName="pincode"/>
+                  </div>
+                  <div class="field-wrap">
+                      <label>Contact<span class="req">*</span></label>
+                      <input type="text" required autocomplete="off" formControlName="contact"/>
+                  </div> 
+                  <button type="submit" class="button button-block nextBtn">Get Started</button>
+                </div>
+            </form>
+        </div>
+        <div id="login">   
+            <h1>Welcome Back!</h1>
+            <form [formGroup]="formLogin">
+                <div class="field-wrap">
+                    <label>Email Address<span class="req">*</span></label>
+                    <input type="email"required autocomplete="off" formControlName="emailFormControl"/>
+                </div>
+                <div class="field-wrap">
+                    <label>Password<span class="req">*</span></label>
+                    <input type="password"required autocomplete="off" formControlName="passwordFormControl"/>
+                </div>
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                <button class="button button-block"  (click)="login()" >Log In</button>
+            </form>
+        </div> 
+    </div><!-- tab-content -->
+</div>

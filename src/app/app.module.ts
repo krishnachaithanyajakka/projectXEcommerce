@@ -32,7 +32,6 @@ import { CustomValidators } from './validator/customValidator';
 import {RegistrationService} from './registration/registration.service';
 import { DocUploadComponent } from './doc-upload/doc-upload.component';
 import { UploadserviceService } from './doc-upload/uploadservice.service';
-import { LoginService } from './navbar/service/login.service';
 import {LoginemitterService} from './utility/loginemitter.service';
 import {Customer} from './pojo/Customer';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -52,6 +51,7 @@ import { SearchComponent } from './search/search.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { SearchProductsComponent } from './search-products/search-products.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { RegistrationLoginComponent } from './registration-login/registration-login.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +88,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProductDetailsComponent,
     SearchProductsComponent,
     CheckoutComponent,
+    RegistrationLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,7 +112,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
     CustomValidators,
     UploadserviceService,
     LoginemitterService,
-    LoginService,
     Customer
   ],
   bootstrap: [AppComponent]

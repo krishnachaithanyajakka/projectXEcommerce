@@ -10,6 +10,11 @@
     <button class="search-btn">
       <i class="fa fa-search"></i>
     </button>
+    <div *ngIf="products">
+      <div class="product_dropdown" *ngFor="let product of products; let k = index" >
+        <p>{{product.productDisplayName}}</p>
+      </div>
+    </div>
   </form>
 </div>
 <!-- /Search -->

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , HostListener} from '@angular/core';
 import {FormControl, NgForm, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NarbarService} from './service/narbar.service';
-import { LoginService} from './service/login.service';
+import { NavbarService} from './service/navbar.service';
 import { LoginemitterService } from '../utility/loginemitter.service';
+import {UserdetailsService} from '../services/userdetails.service';
 import { Router } from '@angular/router';
-import { Customer } from '../pojo/Customer';
 import 'jquery';
 import 'bootstrap';
 import { } from 'googlemaps';
@@ -32,78 +31,21 @@ export class NavbarComponent implements OnInit {
   loginStatus;
   products;
   locationCity: String ="";
-  formLogin = this.formBuilder.group({
-    'emailFormControl': ['', [Validators.required, Validators.email]],
-    'passwordFormControl' : ['', [Validators.required]]
-  });
+  pathName="";
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    this.pathName=window.location.pathname;
+  }
   constructor(private formBuilder: FormBuilder,
-              private navBarService: NarbarService,
-              private _loginService : LoginService,
+              private navBarService: NavbarService,
               private loginemitterService: LoginemitterService,
               private router: Router,
-              private customer: Customer) {
+              private _userdetailsService: UserdetailsService) {
     // private router: Router, 
     // private http: Http
     //this.loadScript();
-    console.log(navBarService.getUserIsLoggedIn());
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = '//connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-
-    window.fbAsyncInit = () => {
-        console.log("fbasyncinit")
-
-        FB.init({
-            appId            : '236517903785922',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v2.10'
-        });
-        FB.AppEvents.logPageView();
-        // This is where we do most of our code dealing with the FB variable like adding an observer to check when the user signs in
-
-        // ** ADD CODE TO NEXT STEP HERE **
-        FB.Event.subscribe('auth.statusChange', (response => {
-          if (response.status === 'connected') {
-            console.log(response);
-            console.log(response.authResponse);
-            // use the response variable to get any information about the user and to see the tokens about the users session
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api(
-              "/" + response.authResponse.userID + '?fields=id,name,first_name,email,gender,picture,age_range,friends',
-              (result) => {
-                  console.log("result===", result);
-                  this.userDetails = result;
-                  customer.setName(result.first_name);
-                  customer.setId(result.id);
-                  customer.setImage(result.picture.data.url);
-                  if(result.first_name !=null && 
-                    result.id != null){
-                  let details={
-                    "id" : result.id,
-                    "name" : result.first_name,
-                    "email" : result.email!=null? result.email: "",
-                    "loginMedium" : "facebook"
-                  }
-                  var loginDetails={
-                    "customerDetails" : details
-                  }
-                  this._loginService.login(loginDetails);
-                }else{
-                  //throw error that you cannot login through facebook , you need help.Serious Help.
-                }
-                  if (result && !result.error) {
-                  }
-            });
-          }
-        }));
-    };
+    console.log(this.navBarService.getUserIsLoggedIn());
     //auth.handleAuthentication();
     if (navigator)
     {
@@ -132,16 +74,16 @@ export class NavbarComponent implements OnInit {
     }
     this.loginSubscription = this.loginemitterService.loginEvent$.subscribe(loginStatus => {
       this.loginStatus= loginStatus;
-      this.userDetails=this._loginService.getCustomerData();
+      this.userDetails=this._userdetailsService.getCustomerData();
       console.log(this.loginStatus);
     });
    }
 
   ngOnInit() {
-    this.loginStatus=this._loginService.getLoginStatus();
+    this.loginStatus=this._userdetailsService.getLoginStatus();
     console.log("loginStatus::"+this.loginStatus)
     if(this.userDetails == null){
-      this.userDetails=this._loginService.getCustomerData();
+      this.userDetails=this._userdetailsService.getCustomerData();
     }
     if(this.loginStatus ==null || this.loginStatus== false){
      // this.router.navigate(['/']);
@@ -159,64 +101,33 @@ export class NavbarComponent implements OnInit {
   //       return Observable.throw(error.json());
   //   });
   // }
-  login(){
-    let customer={
-      "email" : this.formLogin.controls["emailFormControl"].value,
-      "password" : this.formLogin.controls["passwordFormControl"].value,
-      "loginMedium" : "manual"
-    }
-    var loginDetails={
-      "customerDetails" : customer
-    }
-    if(this.formLogin.valid){
-      this._loginService.login(loginDetails); 
-    }
+  ngAfterViewInit(){
+    console.log(window.location.pathname);
+    this.pathName=window.location.pathname;
   }
-
-  searchData(_item: string) { // should be called when minimum no of character are 5 in the text field.
-    console.log(_item);
-    if(_item.length >3){
-      Promise.resolve(this.navBarService.searchProduct(_item))
-      .then(productlistresponse => {
-        if(productlistresponse && productlistresponse.productList.length>0){
-          this.products=productlistresponse.productList;
-          console.log(this.products);
-        }
-      });      
-    }else{
-      $('.product_dropdown p').remove();
-    }
-  }
-
   openModal(id){
     $("#"+id).modal('show');
   }
+  public loadScript() {  
+    var isFound = false;
+    var scripts = document.getElementsByTagName("script")
+    for (var i = 0; i < scripts.length; ++i) {
+        if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
+            isFound = true;
+        }
+    }
 
- 
+    if (!isFound) {
+        var dynamicScripts = ["../assets/js/bootstrap.min.js"];
+        for (var i = 0; i < dynamicScripts .length; i++) {
+            let node = document.createElement('script');
+            node.src = dynamicScripts [i];
+            node.type = 'text/javascript';
+            node.async = false;
+            node.charset = 'utf-8';
+            document.getElementsByTagName('head')[0].appendChild(node);
+        }
 
-public loadScript() {  
-  var isFound = false;
-  var scripts = document.getElementsByTagName("script")
-  for (var i = 0; i < scripts.length; ++i) {
-      if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes("loader")) {
-          isFound = true;
-      }
+    }
   }
-
-  if (!isFound) {
-      var dynamicScripts = ["../assets/js/bootstrap.min.js",
-                            "../assets/js/slick.min.js",
-                            "./assets/js/main.js"];
-
-      for (var i = 0; i < dynamicScripts .length; i++) {
-          let node = document.createElement('script');
-          node.src = dynamicScripts [i];
-          node.type = 'text/javascript';
-          node.async = false;
-          node.charset = 'utf-8';
-          document.getElementsByTagName('head')[0].appendChild(node);
-      }
-
-  }
-}
 }

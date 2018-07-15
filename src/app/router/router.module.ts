@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent} from '../homepage/homepage.component';
-import {RegistrationComponent} from '../registration/registration.component';
+import {RegistrationLoginComponent} from '../registration-login/registration-login.component';
 import {DashboardComponent} from '../admin/dashboard/dashboard.component';
 import {LearnMoreComponent} from '../learn-more/learn-more.component';
 import {NeighboursComponent} from "../neighbours/neighbours.component";
@@ -18,7 +18,11 @@ import { CheckoutComponent } from "../checkout/checkout.component";
       },
       {
         path: 'registration',
-        component: RegistrationComponent
+        component: RegistrationLoginComponent
+      },
+      {
+        path: 'login',
+        component: RegistrationLoginComponent
       },
       {
         path: 'admin',

@@ -4,17 +4,9 @@ import { AjaxService } from '../../services/ajax.service';
 @Injectable({
   providedIn: 'root'
 })
-export class NarbarService {
+export class SearchServiceService {
 
-  isLoggedIn: boolean;
   constructor(private _ajaxService: AjaxService) { }
-
-  setUserIsLoggedIn(loginStatus){
-    this.isLoggedIn= loginStatus;
-  }
-  getUserIsLoggedIn(){
-    return this.isLoggedIn;
-  }
 
   searchProduct(_item: String):Promise<any>{
     return Promise.resolve(this._ajaxService.searchProduct(_item))

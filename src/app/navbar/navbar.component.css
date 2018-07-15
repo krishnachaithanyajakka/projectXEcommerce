@@ -83,3 +83,17 @@ width: 2em;
   box-shadow: none;
   border-bottom: 1px solid #000000;
 }
+.navbarsearch .search-input {
+  padding-left: 24px;
+  border-radius: 35px;
+  font-size: 18px;
+  color: black;
+}
+.navbarsearch{
+  width: 65%;
+}
+@media only screen and (min-width: 1300px) {
+  .pull-left{
+    width: 56% !important;
+  }
+}
