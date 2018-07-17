@@ -11,7 +11,7 @@ declare var google:any;
   }
 })
 
-export class LocationautocompleteDirective {
+export class LocationautocompleteDirective implements OnInit {
 
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   modelValue:any;
@@ -19,10 +19,14 @@ export class LocationautocompleteDirective {
   lat:any;
   lng:any;
   private _el:HTMLElement;
-
+  el;
 
   constructor(el: ElementRef,private model:NgModel) {
-    this._el = el.nativeElement;
+    this.el=el;
+    
+  }
+  ngOnInit(){
+    this._el = this.el.nativeElement;
     this.modelValue = this.model;
     var input = this._el;
 
@@ -31,7 +35,6 @@ export class LocationautocompleteDirective {
       var place = this.autocomplete.getPlace();
       this.invokeEvent(place);
     });
-    
   }
 
   invokeEvent(place:Object) {

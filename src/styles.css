@@ -1,3 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
 body { margin: 0; }
+
+.pac-container{
+    background-color: #4A4E5A !important;
+    margin-left: 20px !important;
+    width:  inherit !important;
+}
+.pac-item{
+    color: white;
+    border: none;
+}
+.pac-item-selected{
+    background-color: transparent !important;
+    background-color:none;
+}
+.pac-icon{
+    color: white;
+}
+.pac-item-query{
+    color: white;
+}
+.pac-matched{
+    color: white;
+}
+.pac-item:hover{
+    color: #1e88e5
+}
+.pac-matched:hover{
+    color: #1e88e5;
+}
+.pac-item-query:hover{
+    color: #1e88e5;
+}

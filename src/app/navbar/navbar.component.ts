@@ -47,31 +47,7 @@ export class NavbarComponent implements OnInit {
     //this.loadScript();
     console.log(this.navBarService.getUserIsLoggedIn());
     //auth.handleAuthentication();
-    if (navigator)
-    {
-      let self=this;
-    navigator.geolocation.getCurrentPosition( pos => {
-        this.lng = +pos.coords.longitude;
-        this.lat = +pos.coords.latitude;
-        let geocoder = new google.maps.Geocoder();
-        let latlng = new google.maps.LatLng(this.lat, this.lng);
-        let request = {
-          location: latlng
-        }; 
-        geocoder.geocode(request, (results, status) => {       //<<<===removed function keyword and added arrowfunction
-
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (results[0] != null) {
-             let city = results[0].address_components[results[0].address_components.length-5].short_name;                      
-              console.log(city);
-              this.locationCity=city;
-            } else {
-              alert("No address available");
-            }
-          }
-});
-      });
-    }
+    
     this.loginSubscription = this.loginemitterService.loginEvent$.subscribe(loginStatus => {
       this.loginStatus= loginStatus;
       this.userDetails=this._userdetailsService.getCustomerData();
@@ -91,7 +67,37 @@ export class NavbarComponent implements OnInit {
     if (window.FB) {
       window.FB.XFBML.parse();
     }
-     this.loadScript();
+    this.loadScript();
+    if (navigator)
+    {
+    let self=this;
+    navigator.geolocation.getCurrentPosition( pos => {
+        this.lng = +pos.coords.longitude;
+        this.lat = +pos.coords.latitude;
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(this.lat, this.lng);
+        let request = {
+          location: latlng
+        }; 
+        geocoder.geocode(request, (results, status) => {       //<<<===removed function keyword and added arrowfunction
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0] != null) {
+             let city = results[0].address_components[results[0].address_components.length-5].short_name;                      
+              console.log(city);
+              self.locationCity=city;
+              console.log("self++"+  self.locationCity);
+              setTimeout(function(){
+                $('.location-input').val(self.locationCity);
+              },10)
+              
+            } else {
+              alert("No address available");
+            }
+          }
+});
+      });
+    }
   }
   // getCurrentIpLocation(): Observable<any> {
   //   return this._http.get('http://ipinfo.io')

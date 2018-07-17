@@ -6,13 +6,11 @@
       <div class="pull-left">
         <span>Welcome to PROJECT-X!</span>
       </div>
-      {{locationCity}}
-      <div class="col-md-4" *ngIf="locationCity.length >0">       
-        {{locationCity.length}}         
+      <!-- <div class="col-md-4" *ngIf="locationCity">              
           <button class="location-btn"><i class="fa fa-map-marker"></i></button>
-          <input class=" search-query input location-input" type="text" placeholder="Location" name="Location" [(ngModel)]="address" #LocationCtrl="ngModel"
-          Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)" value="locationCity">  
-      </div>
+          <input class=" search-query input location-input" type="text" placeholder="Location" name="Location" Googleplace [(ngModel)]="address" #LocationCtrl="ngModel"
+          Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)" value="{{locationCity}}">  
+      </div> -->
       <div class="pull-right">
         <ul class="header-top-links">
           <li><a href="#">Get Started</a></li>
@@ -107,7 +105,7 @@
                     </div>
                     <div class="product-body">
                       <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                      <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                      <h2 class="product-name"><a href="#">XX Item Name</a></h2>
                     </div>
                     <button class="cancel-btn"><i class="fa fa-trash"></i></button>
                   </div>
@@ -117,26 +115,26 @@
                     </div>
                     <div class="product-body">
                       <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                      <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                      <h2 class="product-name"><a href="#">XX Item Name</a></h2>
                     </div>
                     <button class="cancel-btn"><i class="fa fa-trash"></i></button>
                   </div>
                 </div>
                 <div class="shopping-cart-btns">
                   <button class="main-btn">View Cart</button>
-                  <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+                  <button class="primary-btn" [routerLink]="['/checkout']">Checkout <i class="fa fa-arrow-circle-right"></i></button>
                 </div>
               </div>
             </div>
           </li>
           <!-- /Cart -->
           <!-- Learn More -->
-          <li class="header-cart dropdown default-dropdown">
+          <li class="header-cart dropdown default-dropdown" routerLink="/learn-more">
             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
               <div class="header-btns-icon">
                 <i class="fa fa-graduation-cap"></i>
               </div>
-              <strong class="text-uppercase">Learn More</strong>
+              <strong class="text-uppercase" >Learn More</strong>
               <br>                
             </a>
           </li>

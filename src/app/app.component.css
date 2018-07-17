@@ -15,3 +15,8 @@
     border: 1px solid #fff;  /* For debugging */
     width: 900px;
   }
+
+  .pac-container{
+    background-color: #4A4E5A !important;
+    margin-left: 20px !important;
+  }

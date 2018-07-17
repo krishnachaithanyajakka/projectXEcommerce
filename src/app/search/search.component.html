@@ -2,7 +2,7 @@
 <div class="header-search">
 
   <form>
-    <input class=" location-query input location-input pull-left" type="text" placeholder="Location" (input)="$event.target.value.length > 3 && searchData($event.target.value)">
+    <input class=" location-query input location-input pull-left" type="text" placeholder="Location" name="Location" Googleplace [(ngModel)]="address" Googleplace (setAddress)="getAddressOnChange($event,LocationCtrl)">
     <button class="location-btn">
       <i class="fa fa-map-marker" aria-hidden="true"></i>
     </button>

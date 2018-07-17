@@ -11,7 +11,7 @@ window['$'] = window['jQuery'] = $;
   styleUrls: ['./registration.component.css',
               '../../assets/css/login.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
 
 
 }

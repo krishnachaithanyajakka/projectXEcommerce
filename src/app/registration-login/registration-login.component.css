@@ -1,6 +1,6 @@
 .stepwizard-step p {
     margin-top: 0px;
-    color:#666;
+    color:white;
 }
 .stepwizard-row {
     display: table-row;
@@ -14,7 +14,7 @@
 
 .stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
     opacity:1 !important;
-    color:#bbb;
+    color:  black;
 }
 .stepwizard-row:before {
     top: 14px;
@@ -39,8 +39,12 @@
     font-size: 12px;
     line-height: 1.428571429;
     border-radius: 15px;
+    color: white;
 }
 
 .inputwidth {
     width: 100%;
+}
+.field-wrap label {
+    font-weight: 300;
 }

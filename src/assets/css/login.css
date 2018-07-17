@@ -39,8 +39,8 @@ a:hover {
   display: block;
   text-decoration: none;
   padding: 15px;
-  background: #4A4E5A;
-  color: #a0b3b0;
+  background: white;
+  color: black;
   font-size: 20px;
   float: left;
   width: 50%;
@@ -167,4 +167,8 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+.nextBtn:hover, .nextBtn:focus {
+  background: #64b8d8 !important;
 }
