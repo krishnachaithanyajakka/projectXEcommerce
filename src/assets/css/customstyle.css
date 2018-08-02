@@ -416,7 +416,10 @@ textarea.input {
   display: block;
   cursor: pointer;
 }
-
+.header-btns .dropdown-toggle:hover {
+  display: block;
+  cursor: pointer;
+}
 .header-account.dropdown .custom-menu>li>a>i {
   margin-right: 15px;
   color: #1e88e5;
@@ -481,13 +484,14 @@ textarea.input {
 .category-nav {
   float: left;
   width: 270px;
+  height: 50px;
 }
 
 .category-nav .category-header {
   padding: 15px;
   display: block;
   text-transform: uppercase;
-  background: #4A4E5A;
+  background: #1e88e5;
   color: #FFF;
   font-weight: 700;
 }
@@ -789,6 +793,9 @@ textarea.input {
 .banner>img {
   width: 100%;
 }
+.banner-2>img {
+  width: 70%;
+}
 
 .banner.banner-1 .banner-caption {
   position: absolute;
@@ -818,7 +825,7 @@ textarea.input {
 ===========================================================*/
 
 #home .home-wrap {
-  margin-left: 270px;
+  /* margin-left: 270px; */
 }
 
 #home-slick .banner {
@@ -909,7 +916,7 @@ textarea.input {
 }
 
 .product.product-single .product-thumb>img {
-  width: 100%;
+  width: 80%;
 }
 
 .product.product-single .product-thumb:after {
@@ -1300,10 +1307,11 @@ textarea.input {
 
 #product-view .product-view {
   padding: 7.5px;
+  text-align: -webkit-center;
 }
 
 .product-view>img {
-  width: 100%;
+  width: 50%;
 }
 
 /*----------------------------*\

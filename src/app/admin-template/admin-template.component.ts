@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadserviceService } from './uploadservice.service';
-import * as $ from 'jquery';
-window['$'] = window['jQuery'] = $;
-
+import { AdminTemplateService } from './service/admin-template.service';
 @Component({
-  selector: 'app-doc-upload',
-  templateUrl: './doc-upload.component.html',
-  styleUrls: ['./doc-upload.component.scss']
+  selector: 'app-admin-template',
+  templateUrl: './admin-template.component.html',
+  styleUrls: ['./admin-template.component.css']
 })
-export class DocUploadComponent implements OnInit {
+export class AdminTemplateComponent implements OnInit {
 
   selectedFiles: FileList;
   data;
-  constructor(private _uploadService : UploadserviceService) { }
+  constructor(private _uploadService : AdminTemplateService) { }
 
   ngOnInit() {
     let self=this;
@@ -27,7 +24,7 @@ export class DocUploadComponent implements OnInit {
         console.log("DocUploadComponent:::"+ this.data);
       });    
   }
- 
+  
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }

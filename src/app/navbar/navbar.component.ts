@@ -7,7 +7,7 @@ import {UserdetailsService} from '../services/userdetails.service';
 import { Router } from '@angular/router';
 import 'jquery';
 import 'bootstrap';
-import { } from 'googlemaps';
+// import { } from 'googlemaps';
 //import { AuthService } from './auth/auth.service';
 // import { HttpClient } from '@angular/common/http';
 declare var $ : any;
@@ -49,14 +49,14 @@ export class NavbarComponent implements OnInit {
     //auth.handleAuthentication();
     
     this.loginSubscription = this.loginemitterService.loginEvent$.subscribe(loginStatus => {
-      this.loginStatus= loginStatus;
       this.userDetails=this._userdetailsService.getCustomerData();
       console.log(this.loginStatus);
+      this.router.navigate(['/']);
     });
    }
 
   ngOnInit() {
-    this.loginStatus=this._userdetailsService.getLoginStatus();
+    this.userDetails=this._userdetailsService.getCustomerData();
     console.log("loginStatus::"+this.loginStatus)
     if(this.userDetails == null){
       this.userDetails=this._userdetailsService.getCustomerData();
@@ -135,5 +135,13 @@ export class NavbarComponent implements OnInit {
         }
 
     }
+  }
+  logout(){
+    sessionStorage.removeItem("userDetails");
+    this._userdetailsService.setCustomerData(null);
+    this.userDetails = null;
+  }
+  openadmin(){
+    this.loginemitterService.broadcastNavFootHideEvent(false);
   }
 }

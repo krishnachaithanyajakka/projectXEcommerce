@@ -1,10 +1,6 @@
 <label class="btn btn-default">
-  <input type="file" (change)="selectFile($event)">
+  <input type="file" (change)="selectFile($event)" />
 </label>
  
 <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
 
-
-<!-- <section data-ng-controller="myCtrl">
-  <img ng-src="{{s3Url}}{{image.Key}}" width="200px" height="200px" ng-repeat="image in allImageData">
-</section> -->

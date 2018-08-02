@@ -17,19 +17,17 @@ export class LoginService {
   
     
     login(customerDetails): void {
-      Promise.resolve(this._ajaxService.loginCustomer(customerDetails))
-      .then(customerdetail => {
+      this._ajaxService.loginCustomer(customerDetails).subscribe((customerdetail:any)=>{
+        console.log("Customer Status::"+ customerdetail);
         if(customerdetail != null){
           this.customer.setName(customerdetail.customerDetailsList[0].name);
           this.customer.setId(customerdetail.customerDetailsList[0].id);
           this.customer.setImage(customerdetail.customerDetailsList[0].image);
-          this.userdetailsService.setLoginStatus(true);
+          this.customer.setLoginStatus(true);
           this.userdetailsService.setCustomerData(this.customer);
-          console.log("Customer Status::"+ this.userdetailsService.getLoginStatus());
           this.loginEmitterService.broadcastLoginEvent(true);
+          sessionStorage.setItem("userDetails",JSON.stringify(this.customer));
         }
-      },
-        SystemError => {
       });
     }
   

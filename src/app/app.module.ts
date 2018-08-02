@@ -52,6 +52,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { SearchProductsComponent } from './search-products/search-products.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegistrationLoginComponent } from './registration-login/registration-login.component';
+import { Utility } from './utility/utility';
+import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
+import { AdminTemplateComponent } from './admin-template/admin-template.component';
+import { ProductRequirementComponent } from './admin/product-requirement/product-requirement.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +93,9 @@ import { RegistrationLoginComponent } from './registration-login/registration-lo
     SearchProductsComponent,
     CheckoutComponent,
     RegistrationLoginComponent,
+    AvatarUploadComponent,
+    AdminTemplateComponent,
+    ProductRequirementComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +115,7 @@ import { RegistrationLoginComponent } from './registration-login/registration-lo
     })
   ],
   providers: [
+    Utility,
     RegistrationService,
     CustomValidators,
     UploadserviceService,

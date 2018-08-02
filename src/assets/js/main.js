@@ -33,6 +33,7 @@
         }
       }
     }
+   
   });
 
   // HOME SLICK
@@ -143,5 +144,12 @@
       }
     });
   }
+
+  $(".header-btns .header-account").hover(function(){
+    var dropdownMenu = $(this);
+    if(dropdownMenu.is(":visible")){
+        dropdownMenu.toggleClass("open");
+    }
+  });
 
 })(jQuery);

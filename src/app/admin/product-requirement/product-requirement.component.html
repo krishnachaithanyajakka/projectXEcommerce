@@ -1,0 +1,78 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Product</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<form id="product-form" class="clearfix" [formGroup]="productFormGroup">
+					<div class="col-md-8">
+						<div class="billing-details">
+							<!-- <p>Already a customer ? <a href="#">Login</a></p> -->
+							<div class="section-title">
+								<h3 class="title">Upload a Product</h3>
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productId" placeholder="Product Id" formControlName="productId">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productDisplayName" placeholder="Product DisplayName" formControlName="productDisplayName">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productOwnerId" placeholder="Owner Id" formControlName="productOwnerId">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productListId" placeholder="List Id" formControlName="productListId">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="quantity" placeholder="Quantity" formControlName="quantity">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productWeight" placeholder="Individual Weight" formControlName="productWeight">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productArea" placeholder="Area" formControlName="productArea">
+							</div>
+							<div class="form-group">
+								<input class="input" type="date" name="productExpiryDate" placeholder="Expiry Date" formControlName="productExpiryDate">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productCategory" placeholder="Category" formControlName="productCategory">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="productType" placeholder="Type" formControlName="productType">
+							</div>
+							<div class="form-group">
+								<textarea class="input" type="text" name="productDesc" placeholder="Description" formControlName="productDesc"> </textarea>
+							</div>
+							<div class="form-group">
+                  				<button type="button" class="btn btn-primary"  (click)="saveProduct()">Save Product</button>
+								<!-- <div class="input-checkbox">
+									<input type="checkbox" id="register">
+									<label class="font-weak" for="register">Create Account?</label>
+									<div class="caption">
+										<p>Please check the cost details before payments-2.
+											<p>
+												<input class="input" type="password" name="password" placeholder="Enter Your Password">
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->

@@ -9,7 +9,8 @@ export class Customer{
 	private createdBy: String;
 	private updatedTime: String;
 	private updatedBy: String;
-    private image: String;
+	private image: String;
+	private loginStatus: boolean
     
     public getId() {
 		return this.id;
@@ -96,5 +97,11 @@ export class Customer{
 
 	public setImage(image: String) {
 		this.image = image;
+	}
+	public setLoginStatus(loginStatus: boolean){
+		this.loginStatus=loginStatus;
+	}
+	public getLoginStatus(){
+		return this.loginStatus;
 	}
 }

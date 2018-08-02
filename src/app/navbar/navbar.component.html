@@ -73,14 +73,25 @@
               </div>
               <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
             </div>
-            <a class="text-uppercase"  [routerLink]="['/login']" >Login</a> / <a  class="text-uppercase"  [routerLink]="['/registration']">Join</a>
+            <ng-container *ngIf="!userDetails || (userDetails!=null && !userDetails.loginStatus)">
+              <a href="#" class="text-uppercase"  [routerLink]="['/login']" >Login</a> / <a  class="text-uppercase"  [routerLink]="['/registration']">Join</a>
+            </ng-container>
+            <ng-container *ngIf="userDetails && userDetails.loginStatus">
+              <a href="#" class="text-uppercase">Hi</a> , <a  class="text-uppercase">{{userDetails.name}}</a>
+            </ng-container>
             <ul class="custom-menu">
-              <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-              <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-              <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-              <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-              <li><a   [routerLink]="['/login']"><i class="fa fa-unlock-alt"></i> Login</a></li>
-              <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                <ng-container *ngIf="!userDetails || (userDetails && !userDetails.loginStatus)">
+                  <li><a   [routerLink]="['/login']"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                  <li><a href=""><i class="fa fa-user-plus"></i> Create An Account</a></li>
+                </ng-container>
+                <ng-container *ngIf="userDetails && userDetails.loginStatus">
+                    <li><a *ngIf="userDetails.loginStatus" href="" [routerLink]="['/admin']" (click)="openadmin()"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a *ngIf="userDetails.loginStatus" href="" [routerLink]="['/admin/product-req']"><i class="fa fa-user-o"></i> Admin Product</a></li>
+                    <li><a *ngIf="userDetails.loginStatus" href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                    <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+                    <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
+                    <li><a  href="" (click)="logout()"><i class="fa fa-unlock-alt"></i> Logout</a></li>
+                </ng-container>
             </ul>
           </li>
           <!-- /Account -->
@@ -153,3 +164,6 @@
 </header>
 <!-- /HEADER -->
 
+<agm-map [latitude]=lat [longitude]= lng>
+    <agm-marker [latitude]= lat [longitude]= lng ></agm-marker>
+</agm-map>

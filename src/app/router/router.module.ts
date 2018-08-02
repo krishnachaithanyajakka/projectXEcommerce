@@ -8,6 +8,7 @@ import {NeighboursComponent} from "../neighbours/neighbours.component";
 import { ProductDetailsComponent } from "../product-details/product-details.component";
 import { SearchProductsComponent } from "../search-products/search-products.component";
 import { CheckoutComponent } from "../checkout/checkout.component";
+import { ProductRequirementComponent } from "../admin/product-requirement/product-requirement.component";
 
 @NgModule({
   imports: [
@@ -27,6 +28,10 @@ import { CheckoutComponent } from "../checkout/checkout.component";
       {
         path: 'admin',
         component : DashboardComponent
+      },
+      {
+        path: 'admin/product-req',
+        component: ProductRequirementComponent
       },
       {
         path: 'learn-more',

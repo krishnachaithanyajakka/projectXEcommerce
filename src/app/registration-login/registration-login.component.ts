@@ -4,14 +4,19 @@ import { RegistrationService } from './service/registration.service';
 import { LoginService } from './service/login.service';
 import { DocUploadComponent } from '../doc-upload/doc-upload.component';
 import { Customer } from '../pojo/Customer';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { Utility } from '../utility/utility';
 import * as $ from 'jquery';
 window['$'] = window['jQuery'] = $;
 declare var window: any;
 declare var FB: any;
+
+
 @Component({
   selector: 'app-registration-login',
   templateUrl: './registration-login.component.html',
-  styleUrls: ['./registration-login.component.css',
+  styleUrls: ['./registration-login.component.scss',
               '../../assets/css/login.css'
             ]
 })
@@ -19,17 +24,27 @@ export class RegistrationLoginComponent implements OnInit {
 
   isLinear = false;
   userDetails;
+  submitted: boolean=false;
+  form: FormBuilder;
+  category;
+  activeForm;
   
   firstFormGroup = this._formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-    confirmpassword: ['', Validators.required]
+    "name": ['', Validators.required],
+    "email": ['', [Validators.required,Validators.email]],
+    "password": ['', Validators.required],
+    "categoryChoice":['',null]
+    // "confirmpassword": ['', Validators.required]
   });
-  secondFormGroup = this._formBuilder.group({
-    address: ['', Validators.required],
-    pincode: ['', Validators.required],
-    contact: ['', Validators.required]
+  sellerFormGroup = this._formBuilder.group({
+    "address": ['', Validators.required],
+    "pincode": ['', Validators.required],
+    "contact": ['', Validators.required]
+  });
+  buyerFormGroup = this._formBuilder.group({
+    "address": ['', Validators.required],
+    "pincode": ['', Validators.required],
+    "contact": ['', Validators.required]
   });
   formLogin = this._formBuilder.group({
     'emailFormControl': ['', [Validators.required, Validators.email]],
@@ -39,7 +54,11 @@ export class RegistrationLoginComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
               private _registrationService : RegistrationService,
               private _loginService : LoginService,
-              private customer: Customer) 
+              private customer: Customer,
+              private utils: Utility,
+              private router: Router,
+              private activatedRoute: ActivatedRoute
+            ) 
   {
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -122,39 +141,52 @@ export class RegistrationLoginComponent implements OnInit {
             $target.find('input:eq(0)').focus();
         }
     });
-
+    let self=this;
     allNextBtn.click(function () {
+      var curStep = $(this).closest(".setup-content"),
+          curStepBtn = curStep.attr("id"),
+          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+          curInputs = curStep.find("input[type='text'],input[type='url'],input[type='password'],input[type='email']"),
+          isValid = true;
 
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url'],input[type='password'],input[type='email']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-
-        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+      $(".field-wrap").removeClass("has-error");
+      for (var i = 0; i < curInputs.length; i++) {
+          if (!curInputs[i].validity.valid) {
+              isValid = false;
+              $(curInputs[i]).closest(".field-wrap").addClass("has-error");
+          }
+      }
+      if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
     });
     $('div.setup-panel div a.btn-success').trigger('click');
     this.loadScript();
+    this.category="seller";
+    this.activeForm="firstFormGroup";
+  }
+  formgroupValidator(form: any){
+    this.utils.validateAllFormFields(form);
   }
 
   register(){
-    console.log(this.docuploadpath.data);
+    //.log(this.docuploadpath.data);
+    if(this.category=='buyer'){
+      this.activeForm = "buyerFormGroup";
+    }else{
+      this.activeForm = "sellerFormGroup"
+    }
+    if(this.activeForm.invalid){
+      return;
+    }
+    
     let imagepath= (this.docuploadpath ==null || this.docuploadpath.data==null || this.docuploadpath.data.Location ==null) ? "": this.docuploadpath.data.Location;
     let customer={
+      "category" : this.category,
       "name" : this.firstFormGroup.controls["name"].value,
       "email" : this.firstFormGroup.controls["email"].value,
       "password" : this.firstFormGroup.controls["password"].value,
-      "address" : this.secondFormGroup.controls["address"].value,
-      "pincode" : this.secondFormGroup.controls["pincode"].value,
-      "contact" : this.secondFormGroup.controls["contact"].value,
+      "address" : this.activeForm.controls["address"].value,
+      "pincode" : this.activeForm.controls["pincode"].value,
+      "contact" : this.activeForm.controls["contact"].value,
       "image" : imagepath
     }
     let register={
@@ -162,7 +194,7 @@ export class RegistrationLoginComponent implements OnInit {
     }
     
     console.log(register);
-    if(this.firstFormGroup.valid && this.secondFormGroup.valid ){
+    if(this.activeForm.valid){
       this._registrationService.registration(register);
     }else{
 
@@ -202,7 +234,17 @@ export class RegistrationLoginComponent implements OnInit {
       "customerDetails" : customer
     }
     if(this.formLogin.valid){
-      this._loginService.login(loginDetails); 
+      this._loginService.login(loginDetails);
     }
+  }
+
+  shouldShowErrors(fieldName, formName) {
+        return this.utils.shouldShowErrors(fieldName, formName);
+  }
+  getErrorMessage(fieldName, formName) {
+    return this.utils.getErrorMessage(fieldName, formName);
+  }
+  selectNextForm(event){
+    this.category=this.firstFormGroup.controls["categoryChoice"].value;
   }
 }

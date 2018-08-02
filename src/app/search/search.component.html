@@ -6,14 +6,18 @@
     <button class="location-btn">
       <i class="fa fa-map-marker" aria-hidden="true"></i>
     </button>
-    <input class=" search-query input search-input pull-right" type="text" placeholder="Search" (input)="$event.target.value.length > 3 && searchData($event.target.value)">
+    <!-- $event.target.value.length > 3 && -->
+    <input class=" search-query input search-input pull-right" type="text" placeholder="Search" (input)=" searchData($event.target.value)">
     <button class="search-btn">
       <i class="fa fa-search"></i>
     </button>
+    
     <div *ngIf="products">
-      <div class="product_dropdown" *ngFor="let product of products; let k = index" >
-        <p>{{product.productDisplayName}}</p>
-      </div>
+      {{products[0].productDisplayName}}
+      <ul class="product_dropdown" >
+        <li *ngFor="let product of products; let k = index" >{{product.productDisplayName}}</li>
+
+      </ul>
     </div>
   </form>
 </div>

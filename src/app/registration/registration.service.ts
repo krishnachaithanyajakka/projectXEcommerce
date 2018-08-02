@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AjaxService } from '.././services/ajax.service';
+import { AjaxService } from '../services/ajax.service';
 
 @Injectable({
   providedIn: 'root'

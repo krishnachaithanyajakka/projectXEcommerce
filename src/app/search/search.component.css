@@ -74,3 +74,17 @@
         right: 662px;
     }
 }
+.product_dropdown{
+    background: white;
+    width: 462px;
+    position: absolute;
+    top: 41px;
+    left: 244px;
+}
+.product_dropdown li{
+    padding-left: 28px;
+    font-size: 17px;
+    font-weight: 700;
+    display: block;
+    text-align: left;
+}
