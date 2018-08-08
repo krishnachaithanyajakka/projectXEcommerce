@@ -222,4 +222,7 @@ export class AjaxService {
   public registerProduct(product : any){
     return this.psPost("addproduct",product);
   }
+  public searchProductList(item : String){
+    return this.psPost("allproducts",null);
+  }
 }

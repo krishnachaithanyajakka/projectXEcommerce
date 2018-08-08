@@ -7,13 +7,12 @@
       <i class="fa fa-map-marker" aria-hidden="true"></i>
     </button>
     <!-- $event.target.value.length > 3 && -->
-    <input class=" search-query input search-input pull-right" type="text" placeholder="Search" (input)=" searchData($event.target.value)">
+    <input class=" search-query input search-input pull-right" type="text" placeholder="Search" (input)="searchData($event)" (keydown)="searchData($event)">
     <button class="search-btn">
       <i class="fa fa-search"></i>
     </button>
     
     <div *ngIf="products">
-      {{products[0].productDisplayName}}
       <ul class="product_dropdown" >
         <li *ngFor="let product of products; let k = index" >{{product.productDisplayName}}</li>
 

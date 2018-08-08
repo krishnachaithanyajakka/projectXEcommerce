@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SearchProductsService } from '../search-products/service/search-products.service';
+import { ProductDetailsService } from './service/product-details.service';
 
 @Component({
   selector: 'app-product-details',
@@ -6,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-
-  constructor() { }
+  product;
+  constructor(private activatedRoute: ActivatedRoute,
+              private searchProductsService : SearchProductsService,
+              private productDetailsService: ProductDetailsService) { }
 
   ngOnInit() {
     this.loadScript();
+    let productId;
+    this.activatedRoute.params.subscribe(params => {
+      productId = params['id'];
+    });
+    if(productId != null){
+      this.product= this.productDetailsService.getProductFromList(productId,this.searchProductsService.getProductList());
+    }
   }
   public loadScript() {  
     var isFound = false;

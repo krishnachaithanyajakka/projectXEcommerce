@@ -8,21 +8,23 @@ import { AdminTemplateService } from './service/admin-template.service';
 export class AdminTemplateComponent implements OnInit {
 
   selectedFiles: FileList;
-  data;
+  images:any=[];
   constructor(private _uploadService : AdminTemplateService) { }
 
   ngOnInit() {
     let self=this;
+    this._uploadService.getFiles('promotions',function(data){
+      self.images=data;
+      console.log(self.images);
+    }); 
   }
 
   upload(input) {
-    const file = this.selectedFiles.item(0);
-    Promise.resolve(this._uploadService.uploadfile(file))
-    .then(
-      data=>{
-        this.data=data;
-        console.log("DocUploadComponent:::"+ this.data);
-      });    
+    let self = this;
+    this._uploadService.uploadfile(this.selectedFiles,'promotions',function(data){
+      self.images=data;
+      console.log(self.images);
+    });  
   }
   
   selectFile(event) {

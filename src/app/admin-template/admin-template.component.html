@@ -49,11 +49,17 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div >
-              <label class="btn btn-default">
-                <input type="file" (change)="selectFile($event)" />
-              </label>
-               
-              <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                <label class="btn btn-default">
+                    <input type="file" (change)="selectFile($event)" multiple />
+                </label>
+                <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>                          
+                <ng-container *ngIf="images">
+                    <div class="row">
+                        <div class="col-md-2 banner_image" *ngFor="let image of images;">
+                            <img src="{{image.Location}}" />
+                        </div>
+                    </div>
+                </ng-container>
             </div>
   
             <div *ngIf="activepanel=='watch'">

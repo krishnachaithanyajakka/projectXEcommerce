@@ -9,6 +9,7 @@ import { ProductDetailsComponent } from "../product-details/product-details.comp
 import { SearchProductsComponent } from "../search-products/search-products.component";
 import { CheckoutComponent } from "../checkout/checkout.component";
 import { ProductRequirementComponent } from "../admin/product-requirement/product-requirement.component";
+import {AdminTemplateComponent} from "../admin-template/admin-template.component";
 
 @NgModule({
   imports: [
@@ -52,12 +53,16 @@ import { ProductRequirementComponent } from "../admin/product-requirement/produc
         component : ProductDetailsComponent
       },
       {
-        path: 'searchproduct/:category',
+        path: 'searchproduct/:searchitem',
         component: SearchProductsComponent
       },
       {
         path: 'checkout',
         component: CheckoutComponent
+      },
+      {
+        path: 'configuration',
+        component: AdminTemplateComponent
       }
       
     ], { useHash: false })

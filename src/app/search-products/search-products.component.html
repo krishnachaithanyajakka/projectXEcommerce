@@ -196,14 +196,14 @@
 						<!-- row -->
 						<div class="row">
 							<!-- Product Single -->
-							<div class="col-md-4 col-sm-6 col-xs-6">
+							<div  *ngFor="let product of productList; let k = index" class="col-md-4 col-sm-6 col-xs-6">
 								<div class="product product-single">
 									<div class="product-thumb">
 										<div class="product-label">
 											<span>New</span>
 											<span class="sale">-20%</span>
 										</div>
-										<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+										<button class="main-btn quick-view" [attr.data-target]= "product.productId" (click)="showProduct($event)"><i class="fa fa-search-plus"></i> Quick view</button>
 										<img src="../../assets/images/product01.jpg" alt="">
 									</div>
 									<div class="product-body">
@@ -215,7 +215,7 @@
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star-o empty"></i>
 										</div>
-										<h2 class="product-name"><a href="#">XX Tool Name</a></h2>
+										<h2 class="product-name"><a href="#">{{product.productDisplayName}}</a></h2>
 										<div class="product-btns">
 											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
 											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>

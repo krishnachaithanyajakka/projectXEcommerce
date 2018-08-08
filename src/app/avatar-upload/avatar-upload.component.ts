@@ -20,7 +20,7 @@ export class AvatarUploadComponent implements OnInit {
       self.readURL(this);
       self.selectedFiles = this.target.files;
       const file = self.selectedFiles.item(0);
-      Promise.resolve(self._uploadService.uploadfile(file))
+      Promise.resolve(self._uploadService.uploadfile(file,function(){}))
       .then(
         data=>{
           this.data=data;

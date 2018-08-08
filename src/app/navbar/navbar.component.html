@@ -85,12 +85,13 @@
                   <li><a href=""><i class="fa fa-user-plus"></i> Create An Account</a></li>
                 </ng-container>
                 <ng-container *ngIf="userDetails && userDetails.loginStatus">
-                    <li><a *ngIf="userDetails.loginStatus" href="" [routerLink]="['/admin']" (click)="openadmin()"><i class="fa fa-user-o"></i> My Account</a></li>
-                    <li><a *ngIf="userDetails.loginStatus" href="" [routerLink]="['/admin/product-req']"><i class="fa fa-user-o"></i> Admin Product</a></li>
-                    <li><a *ngIf="userDetails.loginStatus" href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                    <li><a href="" [routerLink]="['/admin']" (click)="openadmin()"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a href="" [routerLink]="['/admin/product-req']"><i class="fa fa-user-o"></i> Admin Product</a></li>
+                    <li><a href="" [routerLink]="['/configuration']"><i class="fa fa-user-o"></i> Admin Configuration</a></li>
+                    <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
                     <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
                     <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-                    <li><a  href="" (click)="logout()"><i class="fa fa-unlock-alt"></i> Logout</a></li>
+                    <li><a href="" (click)="logout()"><i class="fa fa-unlock-alt"></i> Logout</a></li>
                 </ng-container>
             </ul>
           </li>
