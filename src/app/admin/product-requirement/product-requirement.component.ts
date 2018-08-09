@@ -35,7 +35,6 @@ export class ProductRequirementComponent implements OnInit {
       var productDetails={
         "product" : this.productFormGroup.value
       }
-      
       this._productRequirementService.registerProduct(productDetails);
     }
   }

@@ -24,7 +24,7 @@ export class AdminTemplateService {
   
   private params1 = {
     Bucket: 'projectxecomm',
-    Key: ''
+    Prefix: 'promotions/'
   };
   constructor() { }
 
@@ -81,14 +81,20 @@ export class AdminTemplateService {
         this.bucket_path = 'projectxecomm';
     }
     let self=this;
-    this.bucket.getObject(this.params1,function (err, data) {
+    this.bucket.listObjects(this.params1,function (err, data) {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return false;
       }
-      console.log('Successfully uploaded file.', data);
-      self.picture_arr=data;
-      callback(self.picture_arr);
+      if(data){
+        console.log('Successfully uploaded file.', data);
+        for(var i=1;i<data.Contents.length;i++){
+          self.picture_arr[i-1]={
+            "Location" : "https://projectxecomm.s3.us-east-2.amazonaws.com/"+data.Contents[i].Key
+          }
+        }
+        callback(self.picture_arr);
+      }
     });
   }
 }
