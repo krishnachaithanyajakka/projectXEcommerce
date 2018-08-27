@@ -1,4 +1,38 @@
+.banner_image{
+    text-align: center;
+}
+
 .banner_image img{
-    height: 100px;
+    height: 150px;
     width: 200px;
+    border: 5px currentColor solid;
+    margin: 10px;
+}
+
+.banner_image a{
+    position: relative;
+    top: -51px;
+    right: 16px;
+    color: white;
+    font-size: 24px;
+    padding-right: 8px;
+}
+
+.configStyle h4{
+    margin-top: 30px;
+}
+
+.service_header h5 a{
+    border: 2px solid #1e88e5;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.img_icon{
+    width: 100px;
+    height: 100px;
+}
+
+.file-upload {
+    text-align: -webkit-right;
 }

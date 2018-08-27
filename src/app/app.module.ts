@@ -56,6 +56,7 @@ import { Utility } from './utility/utility';
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
 import { ProductRequirementComponent } from './admin/product-requirement/product-requirement.component';
+import { ProductComponent } from './admin/product/product.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ProductRequirementComponent } from './admin/product-requirement/product
     AvatarUploadComponent,
     AdminTemplateComponent,
     ProductRequirementComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

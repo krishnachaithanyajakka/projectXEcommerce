@@ -21,7 +21,9 @@ export class ProductDetailsComponent implements OnInit {
       productId = params['id'];
     });
     if(productId != null){
-      this.product= this.productDetailsService.getProductFromList(productId,this.searchProductsService.getProductList());
+      this.productDetailsService.getProductFromList(productId).subscribe(product=>{
+        this.product= product.productList[0];
+      });
     }
   }
   public loadScript() {  

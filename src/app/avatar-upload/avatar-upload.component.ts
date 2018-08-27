@@ -20,13 +20,13 @@ export class AvatarUploadComponent implements OnInit {
       self.readURL(this);
       self.selectedFiles = this.target.files;
       const file = self.selectedFiles.item(0);
-      Promise.resolve(self._uploadService.uploadfile(file,function(){}))
-      .then(
-        data=>{
-          this.data=data;
-          console.log("DocUploadComponent:::"+ this.data);
-        });   
-      });
+      // Promise.resolve(self._uploadService.uploadfile(file,function(){}))
+      // .then(
+      //   data=>{
+      //     this.data=data;
+      //     console.log("DocUploadComponent:::"+ this.data);
+      //   });   
+       });
   }
 
   readURL(input) {

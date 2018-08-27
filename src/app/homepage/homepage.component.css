@@ -37,3 +37,11 @@ a.header {
 .singleadv{
     height: 283px;
 }
+#app-search{
+    position: absolute;
+    top: 120px;
+    left: 207px;
+}
+#bannerContainerContent .banner{
+    position: initial !important;
+}

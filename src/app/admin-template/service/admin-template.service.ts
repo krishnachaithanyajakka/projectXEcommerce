@@ -1,100 +1,89 @@
 import { Injectable } from '@angular/core';
-import * as AWS from 'aws-sdk/global';
-import * as S3 from 'aws-sdk/clients/s3';
+import { AwssettingsService } from '../../services/awssettings.service';
+import { AjaxService } from '../../services/ajax.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminTemplateService {
-  picture_arr: any=[];
   bucket_path = '';
-  gameCallQueue = [];
 
-  private bucket = new S3({
-      accessKeyId: 'AKIAIHPRAV44TVEKB5MQ',
-      secretAccessKey: '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',
-      region: 'us-east-1'
-    });
-
-  private params = {
-    Bucket: 'projectxecomm',
-    Key: '',
-    ACL:    "public-read"
+  private uploadParams = {
+    Bucket: this.awsService.getBucketName(),
+    Key: ''
   };
   
-  private params1 = {
-    Bucket: 'projectxecomm',
-    Prefix: 'promotions/'
+  private getParams = {
+    Bucket: this.awsService.getBucketName(),
+    // Prefix: 'promotions'
   };
-  constructor() { }
+  private deleteParams = {
+    Bucket: this.awsService.getBucketName(),
+    Key : ''
+  };
+  constructor(private awsService : AwssettingsService,
+              private ajaxService : AjaxService) { }
 
   uploadfile(file,type,callback){
-    switch(type){
-      case 'promotions':
-        this.bucket_path = 'promotions/';
-        break;
-      case 'banner':
-        this.bucket_path = 'promotions/';
-        break;
-      default:
-        this.bucket_path = 'projectxecomm';
-    }
-    return new Promise((resolve,reject)=>{
-      for(let i =0;i< file.length;i++){
-        this.params1['Key']=this.bucket_path + file[i];
-        this.params['Key']= this.bucket_path + file[i].name;
-        this.params['Body']= file[i];
-        console.log(this.params1);
-        console.log(this.params);
-        let self=this;
-        this.bucketloader(this.params, i,file, self,function(){
-          console.log("Inside Callback function()");
-            console.log(self.picture_arr);
-            callback(self.picture_arr);
-            return self.picture_arr;
-        });        
-      }
-    });
-  }
-  bucketloader(param: any, i: number, file : any, self:any, callback):any {
-    this.bucket.upload(param, function (err, data) {
-      if (err) {
-        console.log('There was an error uploading your file: ', err);
-        return false;
-      }
-      console.log('Successfully uploaded file.', data);
-      self.picture_arr[i]=data;
-      if(i+1==file.length){
-        callback();
-      }
+    this.awsService.uploadfile(this.uploadParams,this.bucketpath(type), file,function(data){
+      callback(data);
     });
   }
   getFiles(type,callback){
+    this.getParams['Prefix'] = this.bucketpath(type);
+    this.awsService.getFiles(this.getParams,function(data){
+      callback(data);
+    });
+  }
+  
+  deletefile(image,type,callback){
+    this.awsService.deleteFile(image,this.deleteParams,this.bucketpath(type),function(data){
+      callback(data);
+    });
+  }
+  bucketpath(type: string): string{
+    let bucket_path;
     switch(type){
-      case 'promotions':
-        this.bucket_path = 'promotions/';
+      case 'promotion':
+        bucket_path = 'promotion/';
         break;
       case 'banner':
-        this.bucket_path = 'promotions/';
+        bucket_path = 'banner/homepage/';
+        break;
+      case 'middlepage':
+        bucket_path = 'banner/middlepage';
+        break;
+      case '1':
+        bucket_path = 'corousel/1/';
+        break;
+      case '2':
+        bucket_path = 'corousel/2/';
+        break;
+      case '3':
+        bucket_path = 'corousel/3/';
+        break;
+      case '4':
+        bucket_path = 'corousel/4/';
         break;
       default:
-        this.bucket_path = 'projectxecomm';
+        bucket_path = this.awsService.getBucketName();
     }
-    let self=this;
-    this.bucket.listObjects(this.params1,function (err, data) {
-      if (err) {
-        console.log('There was an error uploading your file: ', err);
-        return false;
-      }
-      if(data){
-        console.log('Successfully uploaded file.', data);
-        for(var i=1;i<data.Contents.length;i++){
-          self.picture_arr[i-1]={
-            "Location" : "https://projectxecomm.s3.us-east-2.amazonaws.com/"+data.Contents[i].Key
-          }
-        }
-        callback(self.picture_arr);
-      }
-    });
+    return bucket_path;
+  }
+  getOwnerIds(): Observable<any>{
+    return this.ajaxService.getOwnerIds();
+  }
+  getProductOfOwner(ownerId : String) : Observable<any>{
+    return this.ajaxService.getProductOfOwner(ownerId);
+  }
+  addasset(admin : any){
+    return this.ajaxService.addasset(admin);
+  }
+  getasset(){
+    return this.ajaxService.getasset();
+  }
+  deleteAsset(id){
+    return this.ajaxService.deleteAsset(id);
   }
 }

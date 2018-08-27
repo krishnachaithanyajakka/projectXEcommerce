@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AwssettingsService } from '../services/awssettings.service';
+import { HompageService } from './service/hompage.service';
+import { Router } from '@angular/router';
+import * as _ from "lodash";
 import * as $ from 'jquery';
 window['$'] = window['jQuery'] = $;
 
@@ -8,11 +12,31 @@ window['$'] = window['jQuery'] = $;
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
+  bannerimage = [];
+  bannerContainerContent : String;
+  private getParams = {
+    Bucket: this.awsService.getBucketName(),
+    Prefix : 'banner/homepage/'
+  };
+  constructor(private awsService: AwssettingsService,
+              private _hompageService : HompageService,
+              private router: Router) { }
 
   ngOnInit() {
     this.loadScript();
+  }
+  ngAfterViewInit(){
+    let self = this;
+    this._hompageService.getBanner("1").subscribe(bannerContainer=>{
+      //this.ownerIds = ownerIds;
+      bannerContainer.html =  bannerContainer.html.replace(new RegExp('{{bannerimage}}','g'), bannerContainer.imageURL )
+     // self.bannerContainerContent = bannerContainer.html;
+      $('#bannerContainerContent').append(bannerContainer.html);
+    });
+    
+    // this.awsService.getFiles(this.getParams,function(data){
+    //   self.bannerimage = data[0].Location;
+    // });
   }
 
   public loadScript() {  
@@ -37,6 +61,13 @@ export class HomepageComponent implements OnInit {
             document.getElementsByTagName('head')[0].appendChild(node);
         }
 
+    }
+  }
+  goToProduct(id: String){
+    if(id == null){
+      this.router.navigate(['/searchproduct'])
+    }else{
+      this.router.navigate(['product/',id])
     }
   }
 }

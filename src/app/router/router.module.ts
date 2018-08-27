@@ -10,6 +10,7 @@ import { SearchProductsComponent } from "../search-products/search-products.comp
 import { CheckoutComponent } from "../checkout/checkout.component";
 import { ProductRequirementComponent } from "../admin/product-requirement/product-requirement.component";
 import {AdminTemplateComponent} from "../admin-template/admin-template.component";
+import { ProductComponent } from "../admin/product/product.component";
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import {AdminTemplateComponent} from "../admin-template/admin-template.component
         component : DashboardComponent
       },
       {
-        path: 'admin/product-req',
+        path: 'product-req/:id',
         component: ProductRequirementComponent
       },
       {
@@ -63,6 +64,10 @@ import {AdminTemplateComponent} from "../admin-template/admin-template.component
       {
         path: 'configuration',
         component: AdminTemplateComponent
+      },
+      {
+        path: 'product-account',
+        component: ProductComponent
       }
       
     ], { useHash: false })

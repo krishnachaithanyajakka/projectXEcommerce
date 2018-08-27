@@ -1,577 +1,368 @@
 <div class="container">
-  <div class="panel panel-default learn_more_header">
-    <div class="panel-body">
-      <h3>Add</h3>
-    </div>
-  </div>
   <div class="panel panel-default">
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
               <div class="panel panel-default">
                 <div class="panel-body service_header">
                     <h3>BANNER</h3>
-                    <h4>on items just for you.</h4>
-                    <h4><a (click)="updatepanel('deals')">Learn more.</a></h4>
+                    <h4>Add and Delete Banners.</h4>
+                    <h5><a href="javascript:void(0)" (click)="updatepanel('banner')">OPEN</a></h5>
                 </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
               <div class="panel panel-default ">
                 <div class="panel-body service_header">
                       <h3>PROMOTIONS</h3>
-                      <h4>sellers and searches.</h4>
-                      <h4><a (click)="updatepanel('watch')">Learn more.</a></h4>
+                      <h4>Add and Delete Promotions.</h4>
+                      <h5><a href="javascript:void(0)" (click)="updatepanel('promotion')">OPEN</a></h5>
                 </div>
               </div>
           </div>
-          <div class="col-md-3">
-              <div class="panel panel-default service_header">
-                <div class="panel-body">
-                      <h3>Save Items</h3>
-                      <h4>you want to buy or bid on.</h4>
-                      <h4><a (click)="updatepanel('items')">Learn more.</a></h4>
+          <div class="col-md-4">
+                <div class="panel panel-default service_header">
+                    <div class="panel-body">
+                        <h3>COROUSELS</h3>
+                        <h4>Add and Delete Corousels.</h4>
+                        <h5><a href="javascript:void(0)" (click)="updatepanel('corousel')">OPEN</a></h5>
+                    </div>
                 </div>
-              </div>
-          </div>
-          <div class="col-md-3">
-              <div class="panel panel-default">
-                <div class="panel-body service_header">
-                  <h3>Track selling</h3>
-                  <h4>of your listed items.</h4>
-                  <h4><a (click)="updatepanel('selling')">Learn more.</a></h4>
-                </div>
-              </div>
           </div>
         </div>
       </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <div >
-                <label class="btn btn-default">
-                    <input type="file" (change)="selectFile($event)" multiple />
-                </label>
-                <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>                          
-                <ng-container *ngIf="images">
-                    <div class="row">
-                        <div class="col-md-2 banner_image" *ngFor="let image of images;">
-                            <img src="{{image.Location}}" />
-                        </div>
+            <ng-container *ngIf="successStatus == true">
+                Saved Successfully
+            </ng-container> 
+           
+            <div class="configStyle" *ngIf="activepanel=='banner'"> 
+                <div class="row">  
+                    <div class="col-md-3">
+                        <h4>Banners</h4>
                     </div>
-                </ng-container>
+                    <div class="col-md-9 file-upload">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openModal()">
+                            Add New Banner
+                        </button>
+                    </div>     
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="bannerImages">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of bannerImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('banner', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL,'', image.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="bannerImages.length == 0">
+                        <label>No banners present. Please upload banners.</label>
+                    </ng-container>
+                </div>
             </div>
   
-            <div *ngIf="activepanel=='watch'">
-                  <p>Watch</p>
-                  <div class="alert alert-warning alert-dismissible" role="alert">
-                      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                      This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question, 
-                      make sure to contact us. 
-                  </div>
-              
-                  <br />
-              
-                  <div class="panel-group" id="accordion">
-                      <div class="faqHeader">General questions</div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseOne" class="panel-collapse collapse in">
-                              <div class="panel-body">
-                                  Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling or buying themes. 
-                                  This ensures a valid communication channel for all parties involved in any transactions. 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseTen" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme 
-                                  or a free one, you are encouraged to contribute. All credits are published along with the resources. 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseEleven" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
-                              </div>
-                          </div>
-                      </div>
-              
-                      <div class="faqHeader">Sellers</div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Who cen sell items?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseTwo" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">I want to sell my items - what are the steps?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseThree" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  The steps involved in this process are really simple. All you need to do is:
-                                  <ul>
-                                      <li>Register an account</li>
-                                      <li>Activate your account</li>
-                                      <li>Go to the <strong>Themes</strong> section and upload your theme</li>
-                                      <li>The next step is the approval step, which usually takes about 72 hours.</li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How much do I get from each sale?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseFive" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
-                                  <br />
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Why sell my items here?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseSix" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  There are a number of reasons why you should join us:
-                                  <ul>
-                                      <li>A great 70% flat rate for your items.</li>
-                                      <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                                      <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseEight" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment. 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseNine" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
-                                  The minimum amount of your balance should be at least 70 USD. 
-                              </div>
-                          </div>
-                      </div>
-              
-                      <div class="faqHeader">Buyers</div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a>
-                              </h4>
-                          </div>
-                          <div id="collapseFour" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live preview. 
-                                  Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                                  <br />
-                                  Once the transaction is complete, you gain full access to the purchased product. 
-                              </div>
-                          </div>
-                      </div>
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4 class="panel-title">
-                                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
-                              </h4>
-                          </div>
-                          <div id="collapseSeven" class="panel-collapse collapse">
-                              <div class="panel-body">
-                                  Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures its smooth operation.
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-  
-  
-  
-              <div *ngIf="activepanel=='items'">
-                  <p>Items</p>
-                      <div class="alert alert-warning alert-dismissible" role="alert">
-                          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                          This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question, 
-                          make sure to contact us. 
-                      </div>
-                  
-                      <br />
-                  
-                      <div class="panel-group" id="accordion">
-                          <div class="faqHeader">General questions</div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseOne" class="panel-collapse collapse in">
-                                  <div class="panel-body">
-                                      Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling or buying themes. 
-                                      This ensures a valid communication channel for all parties involved in any transactions. 
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseTen" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme 
-                                      or a free one, you are encouraged to contribute. All credits are published along with the resources. 
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseEleven" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
-                                  </div>
-                              </div>
-                          </div>
-                  
-                          <div class="faqHeader">Sellers</div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Who cen sell items?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseTwo" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">I want to sell my items - what are the steps?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseThree" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      The steps involved in this process are really simple. All you need to do is:
-                                      <ul>
-                                          <li>Register an account</li>
-                                          <li>Activate your account</li>
-                                          <li>Go to the <strong>Themes</strong> section and upload your theme</li>
-                                          <li>The next step is the approval step, which usually takes about 72 hours.</li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How much do I get from each sale?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseFive" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
-                                      <br />
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Why sell my items here?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseSix" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      There are a number of reasons why you should join us:
-                                      <ul>
-                                          <li>A great 70% flat rate for your items.</li>
-                                          <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                                          <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseEight" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment. 
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseNine" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
-                                      The minimum amount of your balance should be at least 70 USD. 
-                                  </div>
-                              </div>
-                          </div>
-                  
-                          <div class="faqHeader">Buyers</div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseFour" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live preview. 
-                                      Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                                      <br />
-                                      Once the transaction is complete, you gain full access to the purchased product. 
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
-                                  </h4>
-                              </div>
-                              <div id="collapseSeven" class="panel-collapse collapse">
-                                  <div class="panel-body">
-                                      Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures its smooth operation.
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-  
-  
-                  <div *ngIf="activepanel=='selling'">
-                      <p>Selling</p>
-                          <div class="alert alert-warning alert-dismissible" role="alert">
-                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                              This section contains a wealth of information, related to <strong>PrepBootstrap</strong> and its store. If you cannot find an answer to your question, 
-                              make sure to contact us. 
-                          </div>
-                      
-                          <br />
-                      
-                          <div class="panel-group" id="accordion">
-                              <div class="faqHeader">General questions</div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseOne" class="panel-collapse collapse in">
-                                      <div class="panel-body">
-                                          Account registration at <strong>PrepBootstrap</strong> is only required if you will be selling or buying themes. 
-                                          This ensures a valid communication channel for all parties involved in any transactions. 
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I submit my own Bootstrap templates or themes?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseTen" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          A lot of the content of the site has been submitted by the community. Whether it is a commercial element/template/theme 
-                                          or a free one, you are encouraged to contribute. All credits are published along with the resources. 
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseEleven" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          All prices for themes, templates and other items, including each seller's or buyer's account balance are in <strong>USD</strong>
-                                      </div>
-                                  </div>
-                              </div>
-                      
-                              <div class="faqHeader">Sellers</div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Who cen sell items?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseTwo" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          Any registed user, who presents a work, which is genuine and appealing, can post it on <strong>PrepBootstrap</strong>.
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">I want to sell my items - what are the steps?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseThree" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          The steps involved in this process are really simple. All you need to do is:
-                                          <ul>
-                                              <li>Register an account</li>
-                                              <li>Activate your account</li>
-                                              <li>Go to the <strong>Themes</strong> section and upload your theme</li>
-                                              <li>The next step is the approval step, which usually takes about 72 hours.</li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How much do I get from each sale?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseFive" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          Here, at <strong>PrepBootstrap</strong>, we offer a great, 70% rate for each seller, regardless of any restrictions, such as volume, date of entry, etc.
-                                          <br />
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Why sell my items here?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseSix" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          There are a number of reasons why you should join us:
-                                          <ul>
-                                              <li>A great 70% flat rate for your items.</li>
-                                              <li>Fast response/approval times. Many sites take weeks to process a theme or template. And if it gets rejected, there is another iteration. We have aliminated this, and made the process very fast. It only takes up to 72 hours for a template/theme to get reviewed.</li>
-                                              <li>We are not an exclusive marketplace. This means that you can sell your items on <strong>PrepBootstrap</strong>, as well as on any other marketplate, and thus increase your earning potential.</li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">What are the payment options?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseEight" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          The best way to transfer funds is via Paypal. This secure platform ensures timely payments and a secure environment. 
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">When do I get paid?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseNine" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          Our standard payment plan provides for monthly payments. At the end of each month, all accumulated funds are transfered to your account. 
-                                          The minimum amount of your balance should be at least 70 USD. 
-                                      </div>
-                                  </div>
-                              </div>
-                      
-                              <div class="faqHeader">Buyers</div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to buy a theme - what are the steps?</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseFour" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          Buying a theme on <strong>PrepBootstrap</strong> is really simple. Each theme has a live preview. 
-                                          Once you have selected a theme or template, which is to your liking, you can quickly and securely pay via Paypal.
-                                          <br />
-                                          Once the transaction is complete, you gain full access to the purchased product. 
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                      <h4 class="panel-title">
-                                          <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Is this the latest version of an item</a>
-                                      </h4>
-                                  </div>
-                                  <div id="collapseSeven" class="panel-collapse collapse">
-                                      <div class="panel-body">
-                                          Each item in <strong>PrepBootstrap</strong> is maintained to its latest version. This ensures its smooth operation.
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+            <div class="configStyle"  *ngIf="activepanel=='promotion'">
+                <!-- <div class="row"> 
+                    <label class="btn btn-default">
+                        <input type="file" (change)="selectFile($event)" multiple />
+                    </label>
+                    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload('promotion')">Upload</button>
+                </div> -->
+                <div class="row">    
+                    <div class="col-md-3">
+                        <h4>Promotions</h4>
+                    </div>
+                    <div class="col-md-9 file-upload">
+                        <button type="button" type="button" class="btn btn-primary"  (click)="openModal()">
+                            Add New Promotion
+                        </button>
+                    </div>   
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="promotionImages">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of promotionImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('promotion', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL,'',image.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="promotionImages.length == 0">
+                        <label>No promotion present.Please upload promotions.</label>
+                    </ng-container>
+                </div>      
+            </div>
+            <div class="configStyle"  *ngIf="activepanel=='1' || activepanel=='2' || activepanel=='3' || activepanel=='4'">
+                <!-- <div class="row"> 
+                    <label class="btn btn-default">
+                        <input type="file" (change)="selectFile($event)" multiple />
+                    </label>
+                    <form [formGroup]="corouselForm">
+                        <div class="radio">
+                            <label><input type="radio" value="1" name="courouselnumber" formControlName="courouselnumber">First Corousel</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" value="2" name="courouselnumber" formControlName="courouselnumber">Second Corousel</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" value="3" name="courouselnumber" formControlName="courouselnumber">Third Corousel</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" value="4" name="courouselnumber" formControlName="courouselnumber">Forth Corousel</label>
+                        </div>
+                    </form>
+                    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload('corousel')">Upload</button>
+                </div> -->
+                <div class="row">    
+                    <div class="col-md-3">
+                        <h4>Corousel</h4>
+                    </div>
+                    <div class="col-md-9 file-upload">
+                        <button type="button" type="button" class="btn btn-primary"  (click)="openModal()">
+                                Add New Corousel
+                        </button>
+                    </div>     
+                </div>
+                <div class="row">    
+                    <h5>1</h5>   
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="oneCorouselImages">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of oneCorouselImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('1', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL,'1',image.id)"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="oneCorouselImages.length == 0">
+                        <label>No corousel present.Please upload corousel.</label>
+                    </ng-container>
+                </div>
+                <div class="row">    
+                    <h5>2</h5>   
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="twoCorouselImages">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of twoCorouselImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('2', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL, '2')"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="twoCorouselImages.length == 0">
+                        <label>No corousel present.Please upload corousel.</label>
+                    </ng-container>
+                </div> 
+                <div class="row">    
+                    <h5>3</h5>    
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="threeCorouselImages">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of threeCorouselImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('3', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL,'3')"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="threeCorouselImages.length == 0">
+                        <label>No corousel present.Please upload corousel.</label>
+                    </ng-container>
+                </div>
+                <div class="row">    
+                    <h5>4</h5>    
+                </div>
+                <div class="row">                   
+                    <ng-container *ngIf="images">
+                        <div class="row">
+                            <div class="col-md-3 banner_image" *ngFor="let image of fourCorouselImages;">
+                                <img src="{{image.imageURL}}" />
+                                <input type="text" value="{{image.imageURL}}" readonly/>
+                                <a href="javascript:void(0)" (click)="update('4', image.id)"><i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="javascript:void(0)" (click)="delete(image.imageURL,'4')"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="fourCorouselImages.length == 0">
+                        <label>No corousel present.Please upload corousel.</label>
+                    </ng-container>
+                </div>   
+            </div>
         </div>
       </div>
   
   </div>
+  <div class="modal fade" id="adminNewModal" tabindex="-1" role="dialog" aria-labelledby="adminNewModal" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="adminNewModal">Add Assets</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form" class="clearfix" [formGroup]="adminAssetForm">
+                    <div>
+                        <div class="billing-details">
+                            <!-- <p>Already a customer ? <a href="#">Login</a></p> -->
+                            <ng-container *ngIf="activepanel=='banner'">
+                                <div class="section-title">
+                                    <h3 class="title">Add a Banner</h3>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="name" placeholder="Name" formControlName="name">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <label class="btn btn-default">
+                                                <input type="file" (change)="selectFile($event)" />
+                                            </label>
+                                            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload('banner')">Upload</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ng-container *ngIf='uploadedImage'>
+                                                <img src="{{uploadedImage}}" class="img_icon"/>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control form-control-lg" name="zoneID"  formControlName="zoneID">
+                                        <option value="">Choose Location</option>
+                                        <option value="1">Homepage</option>
+                                    </select>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="activepanel=='promotion'">
+                                <div class="section-title">
+                                    <h3 class="title">Add a Promotion</h3>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="name" placeholder="Name" formControlName="name">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <label class="btn btn-default">
+                                                <input type="file" (change)="selectFile($event)" />
+                                            </label>
+                                            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload('promotion')">Upload</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ng-container *ngIf='uploadedImage'>
+                                                <img src="{{uploadedImage}}" class="img_icon"/>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control form-control-lg" name="zoneID"  formControlName="zoneID">
+                                        <option value="">Choose Location</option>
+                                        <option value="1">Homepage</option>
+                                    </select>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="activepanel=='1' || activepanel=='2' || activepanel=='3' || activepanel=='4'">
+                                <div class="section-title">
+                                    <h3 class="title">Add a Corousel</h3>
+                                </div>
+                                <div class="form-group">
+                                    <input class="hide" type="text" name="id" placeholder="ID" formControlName="id">
+                                    <input class="input" type="text" name="name" placeholder="Name" formControlName="name">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row"> 
+                                        <div class="col-md-9">
+                                            <label class="btn btn-default">
+                                                <input type="file" (change)="selectFile($event)" />
+                                            </label>
+                                            <form [formGroup]="corouselForm">
+                                                <div class="radio">
+                                                    <label><input type="radio" value="1" name="zoneID" formControlName="zoneID">First Corousel</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label><input type="radio" value="2" name="zoneID" formControlName="zoneID">Second Corousel</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label><input type="radio" value="3" name="zoneID" formControlName="zoneID">Third Corousel</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <label><input type="radio" value="4" name="zoneID" formControlName="zoneID">Forth Corousel</label>
+                                                </div>
+                                            </form>
+                                            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload('corousel')">Upload</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ng-container *ngIf='uploadedImage'>
+                                                <img src="{{uploadedImage}}" class="img_icon"/>
+                                            </ng-container>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="form-group">
+                                <textarea class="hide" type="text" name="image" formControlName="image" ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control form-control-lg" name="ownerId" (change) ="populateProducts()" formControlName="ownerId">
+                                    <option value="">Choose Owner ID</option>
+                                    <option value="{{ids}}" *ngFor="let ids of ownerIds">{{ids}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                    <select class="form-control form-control-lg" name="productsofowner" (change) ="populateProductID()" formControlName="productsofowner">
+                                        <option value="">Choose Product</option>
+                                        <option value="{{product.productId}}" *ngFor="let product of products">{{product.productName}}</option>
+                                    </select>
+                            </div>
+                            <div class="form-group">
+                                <input class="input" type="text" name="productID" placeholder="Product ID" formControlName="productID" disabled>
+                            </div>
+                            <div class="form-group">
+                                <input class="input" type="date" name="startdate" placeholder="Start Date" formControlName="startdate" >
+                            </div>
+                            <div class="form-group">
+                                <input class="input" type="date" name="enddate" placeholder="End Date" formControlName="enddate" >
+                            </div>
+                               
+                            <!-- <div class="form-group">
+                                    <textarea class="myeditor">&lt;p&gt;Hello, World!&lt;/p&gt;</textarea>
+                                    <input type="submit" class="wymupdate"  formControlName="html"/>
+                            </div> -->
+                            <div class="form-group">
+                                <textarea class="input" type="text" name="htmlview" placeholder="HTML View" formControlName="html"></textarea>
+                            </div>						
+                        </div>
+                    </div>
+                </form>
+                <ng-container *ngIf="successStatus == false">
+                    Could not save
+                 </ng-container>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="saveasset()">Save</button>
+            </div>
+          </div>
+        </div>
+        <script src="../../assets/js/jquery.wymeditor.js"></script>
+      </div>
+      

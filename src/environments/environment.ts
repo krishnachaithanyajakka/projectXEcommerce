@@ -6,6 +6,21 @@
 export const environment = {
   production: false,
   //apiUrl: 'http://localhost:4100/'
-  apiUrl: 'http://localhost:8080/'
+  apiUrl: 'http://localhost:8080/',
 
 };
+
+// export const bucketPathsMap = {
+//   "banner 
+// }
+// enum bucketPaths {
+//   banner,
+//   corousel,
+//   promotion,
+//   homepage,
+//   middlepage,
+//   '1',
+//   2,
+//   3,
+//   4
+// }

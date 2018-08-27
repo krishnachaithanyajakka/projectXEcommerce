@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AjaxService } from '../../../services/ajax.service';
+import { AwssettingsService } from '../../../services/awssettings.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductRequirementService {
+  bucketpath = "productImages/";
+  private uploadParams = {
+    Bucket: this._awsService.getBucketName(),
+    Key: ''
+  };
+  constructor(private _ajaxService : AjaxService,
+              private _awsService : AwssettingsService) { }
 
-  constructor(private _ajaxService : AjaxService) { }
+
   registerProduct(productDetails: any){
-    this._ajaxService.registerProduct(productDetails).subscribe((productDetails:any)=>{
-      console.log("Customer Status::"+ productDetails);
+    return this._ajaxService.registerProduct(productDetails);
+  }
+  uploadfile(files,callback){
+    this._awsService.uploadfile(this.uploadParams,this.bucketpath, files,function(data){
+      callback(data);
     });
   }
 }

@@ -36,12 +36,7 @@ export class RegistrationLoginComponent implements OnInit {
     "categoryChoice":['',null]
     // "confirmpassword": ['', Validators.required]
   });
-  sellerFormGroup = this._formBuilder.group({
-    "address": ['', Validators.required],
-    "pincode": ['', Validators.required],
-    "contact": ['', Validators.required]
-  });
-  buyerFormGroup = this._formBuilder.group({
+  registrationFormGroup = this._formBuilder.group({
     "address": ['', Validators.required],
     "pincode": ['', Validators.required],
     "contact": ['', Validators.required]
@@ -169,11 +164,7 @@ export class RegistrationLoginComponent implements OnInit {
 
   register(){
     //.log(this.docuploadpath.data);
-    if(this.category=='buyer'){
-      this.activeForm = "buyerFormGroup";
-    }else{
-      this.activeForm = "sellerFormGroup"
-    }
+    this.activeForm = this.registrationFormGroup;
     if(this.activeForm.invalid){
       return;
     }
@@ -234,7 +225,7 @@ export class RegistrationLoginComponent implements OnInit {
       "customerDetails" : customer
     }
     if(this.formLogin.valid){
-      this._loginService.login(loginDetails);
+      var loginStatus = this._loginService.login(loginDetails);
     }
   }
 
@@ -246,5 +237,8 @@ export class RegistrationLoginComponent implements OnInit {
   }
   selectNextForm(event){
     this.category=this.firstFormGroup.controls["categoryChoice"].value;
+  }
+  routeTo(path: String){
+    this.router.navigate(['/'+path]);
   }
 }

@@ -4,14 +4,11 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./dashboard.component.css',
-               '../../../assets/plugins/bootstrap/css/bootstrap.min.css',
-               '../../../assets//plugins/chartist-js/dist/chartist.min.css',
-               '../../../assets/plugins/chartist-js/dist/chartist-init.css',
-               '../../../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css',
-               '../../../assets/plugins/c3-master/c3.min.css',
-               '../../../assets/css/style.css',
-               '../../../assets/css/colors/blue.css'
+  styleUrls: [  './dashboard.component.css',
+                '../../../assets/js/vendor/fontawesome-free/css/all.min.css',
+                '../../../assets/js/vendor/datatables/dataTables.bootstrap4.css',
+                '../../../assets/css/sb-admin.css',
+
             ]
 })
 export class DashboardComponent implements OnInit {
@@ -33,19 +30,14 @@ export class DashboardComponent implements OnInit {
     }
 
     if (!isFound) {
-        var dynamicScripts = ["../../../assets/plugins/jquery/jquery.min.js",
-                              "../../../assets/plugins/bootstrap/js/tether.min.js" ,
-                              "../../../assets/plugins/bootstrap/js/bootstrap.min.js" ,
-                              "../../../assets/js/jquery.slimscroll.js" ,
-                              "../../../assets/js/waves.js" ,
-                              "../../../assets/js/sidebarmenu.js" ,
-                              "../../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js" ,
-                              "../../../assets/js/custom.min.js" ,
-                              "../../../assets/plugins/chartist-js/dist/chartist.min.js" ,
-                              "../../../assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" ,
-                              "../../../assets/plugins/d3/d3.min.js" ,
-                              "../../../assets/plugins/c3-master/c3.min.js" ,
-                              "../../../assets/js/dashboard1.js" ,   
+        var dynamicScripts = [
+                                "../../../assets/js/vendor/jquery/jquery.min.js",
+                                "../../../assets/js/vendor/bootstrap/js/bootstrap.bundle.min.js",
+                                "../../../assets/js/vendor/jquery-easing/jquery.easing.min.js" ,
+                                "../../../assets/js/vendor/chart.js/Chart.min.js" ,
+                                "../../../assets/js/vendor/datatables/jquery.dataTables.js" ,
+                                "../../../assets/js/vendor/datatables/dataTables.bootstrap4.js" ,
+                                "../../../assets/js/vendor/sb-admin.min.js"  
                               ];
 
         for (var i = 0; i < dynamicScripts .length; i++) {

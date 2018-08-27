@@ -23,10 +23,15 @@ export class DocUploadComponent implements OnInit {
     let self=this;
     // this.data= await this._uploadService.uploadfile(file);
     // console.log("DocUploadComponent :::"+ this.data);
-    this._uploadService.uploadfile(file,function(data){
-      self.data=data;
-      console.log(self.data);
-    });
+
+
+
+    // this._uploadService.uploadfile(file,function(data){
+    //   self.data=data;
+    //   console.log(self.data);
+    // });
+
+
     // Promise.resolve(this._uploadService.uploadfile(file))
     // .subscribe(
     //   data=>{

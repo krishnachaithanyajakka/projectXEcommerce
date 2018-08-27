@@ -99,7 +99,7 @@ export class AjaxService {
     })
   }
   psPost(url,params){
-    let headers = new Headers({ "content-type": "application/json",
+    let headers = new Headers({ "content-type": "application/json ",
     "accept": "application/json, text/plain, */*"});
     return this.http.post(environment.apiUrl+url,JSON.stringify(params),{withCredentials: true,headers:headers}).pipe(map((res: Response) => JSON.parse(res["_body"])));
     // return new Promise((resolve,reject)=>{
@@ -172,7 +172,23 @@ export class AjaxService {
     //  }
     // })
   }
-  psGet(searchParams,url): Promise<String>{
+  psGet(url,searchParams): Observable<any>{
+    // let headers = new Headers();
+    // headers.set('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+    // // Request methods you wish to allow
+    // headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // // Request headers you wish to allow
+    // headers.set('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // // Set to true if you need the website to include cookies in the requests sent
+    // // to the API (e.g. in case you use sessions)
+    // headers.set('Access-Control-Allow-Credentials', 'true');
+
+    return this.http.get(environment.apiUrl+url,{withCredentials: true,search:searchParams}).pipe(map((res: Response) => JSON.parse(res["_body"])));
+  }
+  psGet2(searchParams,url): Promise<String>{
     return new Promise((resolve,reject)=>{
       let self =this;
       this.http.get(environment.apiUrl+url,{withCredentials: true,search:searchParams})
@@ -224,5 +240,35 @@ export class AjaxService {
   }
   public searchProductList(item : String){
     return this.psPost("allproducts",null);
+  }
+  public getOwnerIds(){
+    return this.psGet("getallowners",null);
+  }
+  public getProductOfOwner(ownerID: String){
+    return this.psGet("getownerproducts",{"ownerID": ownerID});
+  }
+  public addasset(admin: any){
+    return this.psPost("saveassets",admin);
+  }
+  public getasset(){
+    return this.psGet("getassets",null);
+  }
+  public deleteAsset(id){
+    return this.psPost("deleteasset?assetID="+id,null);
+  }
+  public getBanner(zoneId : String){
+    return this.psGet("getbanner",{"zoneId": zoneId});
+  }
+  public getPromotion(zoneId : String){
+    return this.psGet("getpromotion",{"zoneId": zoneId});
+  }
+  public getCorousel(zoneId : String){
+    return this.psGet("getcorousel",{"zoneId": zoneId});
+  }
+  public getProductDetails(productId : String){
+    return this.psGet("/product",{"id": productId});
+  }
+  public deleteProduct(productId : any[]){
+    return this.psPost("/product",{"idList": productId});
   }
 }

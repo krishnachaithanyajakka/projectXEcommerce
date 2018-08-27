@@ -785,7 +785,7 @@ textarea.input {
 
 .banner {
   display: block;
-  position: relative;
+  position: initial;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -799,7 +799,7 @@ textarea.input {
 
 .banner.banner-1 .banner-caption {
   position: absolute;
-  top: 30%;
+  top: 47%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
