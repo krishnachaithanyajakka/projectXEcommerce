@@ -216,16 +216,17 @@ export class RegistrationLoginComponent implements OnInit {
     }
   }
   login(){
-    let customer={
-      "email" : this.formLogin.controls["emailFormControl"].value,
-      "password" : this.formLogin.controls["passwordFormControl"].value,
-      "loginMedium" : "manual"
-    }
-    var loginDetails={
-      "customerDetails" : customer
-    }
+    // let customer={
+    //   "username" : this.formLogin.controls["emailFormControl"].value,
+    //   "password" : this.formLogin.controls["passwordFormControl"].value
+    // }
+    // var loginDetails={
+    //   "customerDetails" : customer
+    // }
+    let customer= "username="+this.formLogin.controls["emailFormControl"].value+
+                  "&password="+this.formLogin.controls["passwordFormControl"].value;
     if(this.formLogin.valid){
-      var loginStatus = this._loginService.login(loginDetails);
+      var loginStatus = this._loginService.login(customer);
     }
   }
 

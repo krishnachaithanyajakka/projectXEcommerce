@@ -57,6 +57,7 @@ import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
 import { ProductRequirementComponent } from './admin/product-requirement/product-requirement.component';
 import { ProductComponent } from './admin/product/product.component';
+import { ProductService } from "./admin/product/service/product.service";
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { ProductComponent } from './admin/product/product.component';
     UploadserviceService,
     LoginemitterService,
     Customer
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AdminTemplateService } from "../admin-template/service/admin-template.service";
 import { AwssettingsService } from '../services/awssettings.service';
 import { ProductDisplayService } from './service/product-display.service';
+import { Utility } from '../utility/utility';
 import * as _ from "lodash";
 
 import * as $ from 'jquery';
@@ -24,7 +25,8 @@ export class ProductDisplayFirstComponent implements OnInit {
   constructor(private router: Router,
               private templateService : AdminTemplateService,
               private awsService: AwssettingsService,
-              private _productDisplayService : ProductDisplayService
+              private _productDisplayService : ProductDisplayService,
+              private utils : Utility
             ) {
   }
 

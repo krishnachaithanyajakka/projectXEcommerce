@@ -99,9 +99,9 @@ export class AjaxService {
     })
   }
   psPost(url,params){
-    let headers = new Headers({ "content-type": "application/json ",
-    "accept": "application/json, text/plain, */*"});
-    return this.http.post(environment.apiUrl+url,JSON.stringify(params),{withCredentials: true,headers:headers}).pipe(map((res: Response) => JSON.parse(res["_body"])));
+    let headers = new Headers({ "content-type": "application/json",
+    "accept": "application/json"});
+    return this.http.post(environment.apiUrl+url,params,{withCredentials: true}).pipe(map((res: Response) => JSON.parse(res["_body"])));
     // return new Promise((resolve,reject)=>{
     //   let self =this;
     // 	let loginMessage:string = "";
@@ -188,6 +188,10 @@ export class AjaxService {
 
     return this.http.get(environment.apiUrl+url,{withCredentials: true,search:searchParams}).pipe(map((res: Response) => JSON.parse(res["_body"])));
   }
+  postForm(url, body) {
+    let headers = new Headers({  "content-type": "application/x-www-form-urlencoded"});
+    return this.http.post(environment.apiUrl+url,body,{withCredentials: true,headers: headers }).pipe(map((res: Response) => JSON.parse(res["_body"])));
+  }
   psGet2(searchParams,url): Promise<String>{
     return new Promise((resolve,reject)=>{
       let self =this;
@@ -229,7 +233,7 @@ export class AjaxService {
     //this.psPost("customer",customer);
   }
   public loginCustomer(customerDetails: any){
-    return this.psPost("login",customerDetails);
+    return this.postForm("login",customerDetails);
   }
   public searchProduct(item:String){
     return this.psPost("productname?itemname="+item,null);

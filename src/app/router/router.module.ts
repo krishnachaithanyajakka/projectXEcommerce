@@ -36,6 +36,10 @@ import { ProductComponent } from "../admin/product/product.component";
         component: ProductRequirementComponent
       },
       {
+        path: 'product-req',
+        component: ProductRequirementComponent
+      },
+      {
         path: 'learn-more',
         component : LearnMoreComponent,
         children: [

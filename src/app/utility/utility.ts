@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
+import { Float } from 'aws-sdk/clients/gamelift';
 
 @Injectable()
 export class Utility {
@@ -25,5 +26,15 @@ export class Utility {
             this.validateAllFormFields(control);
             }
         });
+    }
+
+    offpercent(newPrice: string, oldPrice: string): Float{
+        let n_price = parseFloat(newPrice);
+        let o_price = parseFloat(oldPrice);
+        let percent = 0.0;
+        if(o_price > n_price){
+            return percent= -(((o_price-n_price)/o_price)*100);
+        }
+        return 0;
     }
 }

@@ -19,17 +19,21 @@ export class LoginService {
     login(customerDetails): void {
       this._ajaxService.loginCustomer(customerDetails).subscribe((customerdetail:any)=>{
         console.log("Customer Status::"+ customerdetail);
-        if(customerdetail != null){
-          this.customer.setName(customerdetail.customerDetailsList[0].name);
-          this.customer.setId(customerdetail.customerDetailsList[0].id);
-          this.customer.setImage(customerdetail.customerDetailsList[0].image);
-          this.customer.setEmail(customerdetail.customerDetailsList[0].email);
-          this.customer.setContact(customerdetail.customerDetailsList[0].contact);
+        if(customerdetail ===true){
           this.customer.setLoginStatus(true);
-          this.userdetailsService.setCustomerData(this.customer);
           this.loginEmitterService.broadcastLoginEvent(true);
-          sessionStorage.setItem("userDetails",JSON.stringify(this.customer)); 
         }
+        // if(customerdetail != null){
+        //   this.customer.setName(customerdetail.customerDetailsList[0].name);
+        //   this.customer.setId(customerdetail.customerDetailsList[0].id);
+        //   this.customer.setImage(customerdetail.customerDetailsList[0].image);
+        //   this.customer.setEmail(customerdetail.customerDetailsList[0].email);
+        //   this.customer.setContact(customerdetail.customerDetailsList[0].contact);
+        //   this.customer.setLoginStatus(true);
+        //   this.userdetailsService.setCustomerData(this.customer);
+        //   this.loginEmitterService.broadcastLoginEvent(true);
+        //   sessionStorage.setItem("userDetails",JSON.stringify(this.customer)); 
+        // }
       });
     }
   
