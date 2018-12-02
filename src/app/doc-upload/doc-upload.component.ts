@@ -18,7 +18,7 @@ export class DocUploadComponent implements OnInit {
     let self=this;
   }
 
-  upload(input) {
+  upload(input? :any) {
     const file = this.selectedFiles;
     let self=this;
     // this.data= await this._uploadService.uploadfile(file);

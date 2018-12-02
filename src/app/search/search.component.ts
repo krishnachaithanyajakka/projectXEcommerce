@@ -12,10 +12,12 @@ declare var $ : any;
 export class SearchComponent implements OnInit {
 
   products;
-  count: number=0
+  count: number=0;
+  address;
+  LocationCtrl;
+
   constructor(private searchService: SearchServiceService,
-              private router: Router
-            ) { }
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -55,6 +57,8 @@ export class SearchComponent implements OnInit {
       }
     }
   }
-
+getAddressOnChange(event){
+  console.log(event);
+}
 
 }

@@ -52,7 +52,7 @@ export class RegistrationLoginComponent implements OnInit {
               private customer: Customer,
               private utils: Utility,
               private router: Router,
-              private activatedRoute: ActivatedRoute
+              public activatedRoute: ActivatedRoute
             ) 
   {
     (function(d, s, id){
