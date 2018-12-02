@@ -10,6 +10,7 @@ import * as _ from "lodash";
 })
 export class ProductComponent implements OnInit {
   products : any;
+  successStatus;
   constructor(private _productService : ProductService,
               private router : Router) { }
 

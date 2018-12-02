@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
       }
     }
   }
-getAddressOnChange(event){
+getAddressOnChange(event,location){
   console.log(event);
 }
 
