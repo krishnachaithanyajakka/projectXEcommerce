@@ -24,7 +24,7 @@ export class RegistrationLoginComponent implements OnInit {
 
   isLinear = false;
   userDetails;
-  submitted: boolean=false;
+  submitted: boolean=false;   
   form: FormBuilder;
   category;
   activeForm;
